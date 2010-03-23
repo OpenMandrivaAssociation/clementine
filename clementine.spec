@@ -32,9 +32,20 @@ Clementine is a modern music player and library organiser. Clementine is
 a port of Amarok 1.4, with some features rewritten to take advantage of
 Qt4. 
 Features:
-    * Search and play your local music library
-    * Listen to internet radio from Last.fm and SomaFM
-    * Edit tags on MP3 and OGG files, organise your music 
+      * Album cover art is now automatically loaded from disk for your library
+      * Cover manager downloads missing covers from Last.fm
+      * Covers for Last.fm radio tracks are shown in notifications
+      * Much better "Various Artists" detection
+      * Menu items to force albums to be shown under "Various Artists"
+      * Support for M3U and XSPF playlists
+      * Menu items to add files and streams by URL
+      * Shuffle and Repeat modes for the playlist
+      * Option to hide the system tray icon
+      * Option to show notifications when changing volume (disabled by default)
+      * Playlist columns for albumartist, composer, file type, date
+      * Menu item to automatically number tracks in the playlist
+      * More 2D analyzers from Amarok 1.4
+      * (Linux) Media keys (play, stop, etc.) should work under Gnome 
 
 %files 
 %defattr(-,root,root)
