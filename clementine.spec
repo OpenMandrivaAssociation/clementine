@@ -1,7 +1,7 @@
 %define name	clementine
 %define version	0.2
-#define	svn	370
-%define release	%mkrel 1
+%define	svn	547
+%define release	%mkrel 1.svn.%svn 0
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -10,8 +10,8 @@ Summary:	%Summary
 Name:		%name
 Version:	%version
 Release:	%release
-Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-#Source0:	%{name}-svn.tar.lzma
+#Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:	%{name}-svn.tar.lzma
 # svn checkout http://clementine-player.googlecode.com/svn/trunk/ clementine-svn
 # tar -caf clementine-svn.tar.lzma clementine-svn
 
@@ -57,7 +57,7 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%setup -q 
+%setup -q -n clementine-svn 
 
 %build
 %cmake_qt4
