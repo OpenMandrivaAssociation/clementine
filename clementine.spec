@@ -1,6 +1,6 @@
 %define name	clementine
 %define version	0.2
-%define	svn	547
+%define	svn	586
 %define release	%mkrel 1.svn.%svn 0
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
@@ -20,12 +20,15 @@ Group:		Sound
 URL:		http://code.google.com/p/clementine-player/
 BuildRequires:	qt4-devel 
 BuildRequires:	taglib-devel
-BuildRequires:	libxine-devel
+#BuildRequires:	libxine-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	libboost-devel
+#BuildRequires:	qt4-linguist
+#BuildRequires:	vlc-devel
+BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
-Suggests:	xine-pulse
+Suggests:	gstreamer0.10-decoders-audio
 
 %description
 Clementine is a modern music player and library organiser. Clementine is
@@ -52,7 +55,6 @@ Features:
 %_bindir/clementine
 %_datadir/applications/clementine.desktop
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
-
 
 #---------------------------------------------------------------------
 
