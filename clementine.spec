@@ -1,7 +1,7 @@
 %define name	clementine
-%define version	0.2
+%define version	0.2.99
 %define	svn	787
-%define release	%mkrel 1.svn.%svn 0
+%define release	%mkrel 1
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -10,8 +10,8 @@ Summary:	%Summary
 Name:		%name
 Version:	%version
 Release:	%release
-#Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-Source0:	%{name}-svn.tar.lzma
+Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
+#Source0:	%{name}-svn.tar.lzma
 # svn checkout http://clementine-player.googlecode.com/svn/trunk/ clementine-svn
 # tar -caf clementine-svn.tar.lzma clementine-svn
 
@@ -20,12 +20,11 @@ Group:		Sound
 URL:		http://code.google.com/p/clementine-player/
 BuildRequires:	qt4-devel 
 BuildRequires:	taglib-devel
-BuildRequires:	libnotify-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	libboost-devel
 BuildRequires:	qt4-linguist
-#BuildRequires:	vlc-devel
-#BuildRequires:	libxine-devel
+BuildRequires:	vlc-devel
+BuildRequires:	libxine-devel
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
 Suggests:	gstreamer0.10-decoders-audio
@@ -59,7 +58,7 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%setup -q -n clementine-svn 
+%setup -q  
 
 %build
 %cmake_qt4 -DQT_PHONON_INCLUDE_DIR=%_includedir 
