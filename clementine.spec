@@ -1,7 +1,7 @@
 %define name	clementine
 %define version	0.3
 %define	svn	787
-%define release	%mkrel 0.rc1.1
+%define release	%mkrel 0.rc1.2
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
