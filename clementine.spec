@@ -62,7 +62,7 @@ Features:
 
 %build
 %cmake_qt4 -DQT_PHONON_INCLUDE_DIR=%_includedir 
-%make
+make -j 4
 
 %install
 %__rm -rf %buildroot
