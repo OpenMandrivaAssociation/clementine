@@ -1,7 +1,7 @@
 %define name	clementine
 %define version	0.3
 %define	svn	787
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -27,6 +27,7 @@ BuildRequires:	vlc-devel
 BuildRequires:	libxine-devel
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
+Requires:	qt4-database-plugin-sqlite
 Suggests:	gstreamer0.10-decoders-audio
 
 %description
