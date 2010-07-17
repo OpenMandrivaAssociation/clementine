@@ -1,7 +1,6 @@
 %define name	clementine
-%define version	0.3
-%define	svn	787
-%define release	%mkrel 2
+%define version	0.4.2
+%define release	%mkrel 1
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -27,6 +26,7 @@ BuildRequires:	vlc-devel
 BuildRequires:	libxine-devel
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
+BuildRequires:	glew-devel
 Requires:	qt4-database-plugin-sqlite
 Suggests:	gstreamer0.10-decoders-audio
 
@@ -53,6 +53,7 @@ Features:
 %files 
 %defattr(-,root,root)
 %_bindir/clementine
+%_datadir/clementine
 %_datadir/applications/clementine.desktop
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
 
@@ -63,7 +64,7 @@ Features:
 
 %build
 %cmake_qt4 -DQT_PHONON_INCLUDE_DIR=%_includedir 
-make -j 4
+%make
 
 %install
 %__rm -rf %buildroot
