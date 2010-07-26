@@ -64,7 +64,8 @@ Features:
 
 %build
 %cmake_qt4  
-%make
+# use of make -j 4 because %make seems to failed on BS here 
+make -j 4 
 
 %install
 %__rm -rf %buildroot
