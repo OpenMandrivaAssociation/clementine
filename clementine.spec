@@ -1,6 +1,6 @@
 %define name	clementine
 %define version	0.4.2
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
