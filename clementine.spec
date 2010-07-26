@@ -63,7 +63,7 @@ Features:
 %setup -q  
 
 %build
-%cmake_qt4 -DQT_PHONON_INCLUDE_DIR=%_includedir 
+%cmake_qt4  
 %make
 
 %install
