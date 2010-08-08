@@ -1,6 +1,6 @@
 %define name	clementine
 %define version	0.4.2
-%define release	%mkrel 2
+%define release	%mkrel 3
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -10,10 +10,8 @@ Name:		%name
 Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-#Source0:	%{name}-0.2.99.tar.gz
-# svn checkout http://clementine-player.googlecode.com/svn/trunk/ clementine-svn
-# tar -caf clementine-svn.tar.lzma clementine-svn
-
+Patch0:		clementine-0.4.2-upstream-fix-lastfmcrash.patch
+Patch1:		clementine-0.4.2-upstream-fix-debug.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://code.google.com/p/clementine-player/
@@ -22,11 +20,10 @@ BuildRequires:	taglib-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	libboost-devel
 BuildRequires:	qt4-linguist
-BuildRequires:	vlc-devel
-BuildRequires:	libxine-devel
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
 BuildRequires:	glew-devel
+Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Suggests:	gstreamer0.10-decoders-audio
 
@@ -53,7 +50,6 @@ Features:
 %files 
 %defattr(-,root,root)
 %_bindir/clementine
-%_datadir/clementine
 %_datadir/applications/clementine.desktop
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
 
@@ -61,9 +57,11 @@ Features:
 
 %prep
 %setup -q  
+%patch0 -p 0
+%patch1 -p 0
 
 %build
-%cmake_qt4  
+%cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
 # use of make -j 4 because %make seems to failed on BS here 
 make -j 4 
 
