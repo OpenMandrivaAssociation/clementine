@@ -15,7 +15,7 @@ Patch1:		clementine-0.4.2-upstream-fix-debug.patch
 Patch2:		clementine-0.4.2-upstream-fix-numeric-locale.patch
 License:	GPLv3
 Group:		Sound 
-URL:		http://code.google.com/p/clementine-player/
+URL:		http://www.clementine-player.org/
 BuildRequires:	qt4-devel 
 BuildRequires:	taglib-devel
 BuildRequires:	liblastfm-devel
