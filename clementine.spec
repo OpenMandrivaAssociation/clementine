@@ -1,6 +1,6 @@
 %define name	clementine
-%define version	0.4.2
-%define release	%mkrel 4
+%define version	0.5
+%define release	%mkrel 1
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -10,9 +10,6 @@ Name:		%name
 Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:		clementine-0.4.2-upstream-fix-lastfmcrash.patch
-Patch1:		clementine-0.4.2-upstream-fix-debug.patch
-Patch2:		clementine-0.4.2-upstream-fix-numeric-locale.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
@@ -24,43 +21,40 @@ BuildRequires:	qt4-linguist
 BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
 BuildRequires:	glew-devel
+BuildRequires:	libmtp-devel
+BuildRequires:	libgpod-devel
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Suggests:	gstreamer0.10-decoders-audio
-
+# Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
+# which is need at least to mount mtp devices (tested locally)
+Suggests:	gvfs-iphone
 %description
 Clementine is a modern music player and library organiser. Clementine is
 a port of Amarok 1.4, with some features rewritten to take advantage of
 Qt4. 
 Features:
-      * Album cover art is now automatically loaded from disk for your library
-      * Cover manager downloads missing covers from Last.fm
-      * Covers for Last.fm radio tracks are shown in notifications
-      * Much better "Various Artists" detection
-      * Menu items to force albums to be shown under "Various Artists"
-      * Support for M3U and XSPF playlists
-      * Menu items to add files and streams by URL
-      * Shuffle and Repeat modes for the playlist
-      * Option to hide the system tray icon
-      * Option to show notifications when changing volume (disabled by default)
-      * Playlist columns for albumartist, composer, file type, date
-      * Menu item to automatically number tracks in the playlist
-      * More 2D analyzers from Amarok 1.4
-      * (Linux) Media keys (play, stop, etc.) should work under Gnome 
+	* Search and play your local music library
+	* Listen to internet radio from Last.fm, SomaFM and Magnatune
+	* Tabbed playlists, import and export M3U, XSPF, PLS and ASX
+	* Visualisations from projectM
+	* Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AAC
+	* Edit tags on MP3 and OGG files, organise your music
+	* Download missing album cover art from Last.fm
+	* Remote control using a Wii Remote, MPRIS or the command-line
+	* Copy music to your iPod, iPhone, MTP or mass-storage USB player
+	* Queue manage
 
 %files 
 %defattr(-,root,root)
 %_bindir/clementine
 %_datadir/applications/clementine.desktop
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
-
+%_iconsdir/hicolor/scalable/apps/application-x-clementine.svg
 #---------------------------------------------------------------------
 
 %prep
 %setup -q  
-%patch0 -p 0
-%patch1 -p 0
-%patch2 -p 0
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
