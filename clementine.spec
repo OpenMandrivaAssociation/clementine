@@ -22,7 +22,6 @@ BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
 BuildRequires:	glew-devel
 BuildRequires:	libmtp-devel
-BuildRequires:	libindicate-qt-devel
 BuildRequires:	usbmuxd-devel
 BuildRequires:	libplist-devel
 BuildRequires:	libimobiledevice-devel
