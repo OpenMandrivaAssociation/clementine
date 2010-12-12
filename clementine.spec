@@ -13,8 +13,8 @@ Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
-BuildRequires:	qt4-devel 
-BuildRequires:	taglib-devel
+BuildRequires:	qt4-devel >= 4.5.0
+BuildRequires:	taglib-devel >= 1.6
 BuildRequires:	liblastfm-devel
 BuildRequires:	libboost-devel
 BuildRequires:	qt4-linguist
@@ -22,7 +22,12 @@ BuildRequires:	gstreamer0.10-devel
 BuildRequires:	cmake
 BuildRequires:	glew-devel
 BuildRequires:	libmtp-devel
-BuildRequires:	libgpod-devel
+BuildRequires:	libindicate-qt-devel
+BuildRequires:	usbmuxd-devel
+BuildRequires:	libplist-devel
+BuildRequires:	libimobiledevice-devel
+BuildRequires:	libgpod-devel >= 0.7.92
+
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Suggests:	gstreamer0.10-decoders-audio
@@ -57,13 +62,16 @@ Features:
 %setup -q  
 
 %build
-%cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
+%cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF -DENABLE_LIBGPOD=ON -DENABLE_LIBMTP=ON -DENABLE_IMOBILEDEVICE=ON -DENABLE_WIIMOTEDEV=ON
 # use of make -j 4 because %make seems to failed on BS here 
 make -j 4 
 
 %install
 %__rm -rf %buildroot
 %makeinstall_std -C build
+# Remove unused files (aka ubuntu theme...) for the momemnt
+
+%__rm -rf  %{buildroot}/%{_datadir}/icons/ubuntu-mono-dark/ %{buildroot}/%{_datadir}/icons/ubuntu-mono-light
 
 %clean
 %__rm -rf %buildroot
