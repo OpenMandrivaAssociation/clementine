@@ -25,6 +25,7 @@ BuildRequires:	libmtp-devel
 BuildRequires:	usbmuxd-devel
 BuildRequires:	libplist-devel
 BuildRequires:	libimobiledevice-devel
+BuildRequires:	libindicate-qt-devel
 BuildRequires:	libgpod-devel >= 0.7.92
 
 Requires:	libprojectm-data
@@ -62,8 +63,7 @@ Features:
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF -DENABLE_LIBGPOD=ON -DENABLE_LIBMTP=ON -DENABLE_IMOBILEDEVICE=ON -DENABLE_WIIMOTEDEV=ON
-# use of make -j 4 because %make seems to failed on BS here 
-make -j 4 
+%make
 
 %install
 %__rm -rf %buildroot
