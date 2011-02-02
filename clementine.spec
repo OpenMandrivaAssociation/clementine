@@ -10,8 +10,9 @@ Name:		%name
 Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:		useplainsidebar.patch
-Patch1:		playlist-fields.patch
+Patch0:		clementine-0.6-useplainsidebar.patch
+Patch1:		clementine-0.6-default-playlist-fields.patch
+Patch2:		clementine-0.6-use-default-language.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
@@ -62,8 +63,9 @@ Features:
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p0
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
