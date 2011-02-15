@@ -33,10 +33,17 @@ BuildRequires:	libgpod-devel >= 0.7.92
 
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
+Requires:	gstreamer0.10-flac
+Requires:	gstreamer0.10-plugins-ugly
+Requires:	libdvdread4
+Requires:	libid3tag0
+Requires:	libmad0
+
 Suggests:	gstreamer0.10-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
 # which is need at least to mount mtp devices (tested locally)
 Suggests:	gvfs-iphone
+
 %description
 Clementine is a modern music player and library organiser. Clementine is
 a port of Amarok 1.4, with some features rewritten to take advantage of
