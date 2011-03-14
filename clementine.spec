@@ -1,6 +1,6 @@
 %define name	clementine
 %define version	0.6
-%define release	%mkrel 7
+%define release	%mkrel 8
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
@@ -37,9 +37,6 @@ Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Requires:	gstreamer0.10-flac
 Requires:	gstreamer0.10-plugins-ugly
-Requires:	libdvdread4
-Requires:	libid3tag0
-Requires:	libmad0
 
 Suggests:	gstreamer0.10-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
