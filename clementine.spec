@@ -1,20 +1,15 @@
 %define name	clementine
-%define version	0.6
-%define release	%mkrel 8
+%define version	0.7
+%define release	%mkrel 1
 
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
 
 Summary:	%Summary
-Name:		%name
+Name:		clementine
 Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
-Patch0:		clementine-0.6-useplainsidebar.patch
-Patch1:		clementine-0.6-default-playlist-fields.patch
-Patch2:		clementine-0.6-use-default-language.patch
-Patch3:		clementine-0.6-larger-sidebar.patch
-Patch4:		clementine-0.6-ptbr-tranlations-fixes.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
@@ -69,11 +64,6 @@ Features:
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
