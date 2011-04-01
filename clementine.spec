@@ -30,6 +30,7 @@ BuildRequires:	usbmuxd-devel
 BuildRequires:	libplist-devel
 BuildRequires:	libimobiledevice-devel
 BuildRequires:	libindicate-qt-devel
+BuildRequires:	echonest-devel
 BuildRequires:	libgpod-devel >= 0.7.92
 
 Requires:	libprojectm-data
@@ -72,15 +73,11 @@ Features:
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
-#-DENABLE_LIBGPOD=ON -DENABLE_LIBMTP=ON -DENABLE_IMOBILEDEVICE=ON -DENABLE_WIIMOTEDEV=ON
 %make
 
 %install
 %__rm -rf %buildroot
 %makeinstall_std -C build
-# Remove unused files (aka ubuntu theme...) for the momemnt
-
-%__rm -rf  %{buildroot}/%{_datadir}/icons/ubuntu-mono-dark/ %{buildroot}/%{_datadir}/icons/ubuntu-mono-light
 
 %clean
 %__rm -rf %buildroot
