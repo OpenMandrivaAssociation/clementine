@@ -10,6 +10,7 @@ Name:		%name
 Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
+Source1:	Clementine.conf
 Patch0:		clementine-0.6-use-default-language.patch
 Patch1:		clementine-0.7.1-pt_BR_translations.patch
 License:	GPLv3
