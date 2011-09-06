@@ -1,7 +1,6 @@
 %define name	clementine
 %define version	0.7.1
-%define release 8
-
+%define release 110906git
 %define Summary	A cross-platform music player based on Amarok 1.4  
 
 
@@ -11,13 +10,8 @@ Version:	%version
 Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	Clementine.conf
-Source2:	application-x-clementine.png
-Source3:	application-x-clementine.svg
-Source4:	icons.tar.gz
 Patch0:		clementine-0.6-use-default-language.patch
 Patch1:		clementine-0.7.1-pt_BR_translations.patch
-Patch2:		clementine-0.7.1_fix_description.patch
-Patch3:         clementine-0.7.1-ru_translations.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
@@ -75,7 +69,6 @@ Features:
 %prep
 %setup -q
 %apply_patches
-tar zxvf %SOURCE4
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF 
@@ -87,12 +80,6 @@ tar zxvf %SOURCE4
 
 install -m 644 -D %{_sourcedir}/Clementine.conf \
 %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
-
-install -m 644 -D %{_sourcedir}/application-x-clementine.png \
-%{buildroot}%_iconsdir/hicolor/64x64/apps/application-x-clementine.png
-
-install -m 644 -D %{_sourcedir}/application-x-clementine.svg \
-%{buildroot}%_iconsdir/hicolor/scalable/apps/application-x-clementine.svg
 
 
 %clean
