@@ -1,6 +1,6 @@
 %define name	clementine
 %define version	0.7.1
-%define release 110906git
+%define release 110911git
 %define Summary	A cross-platform music player based on Amarok 1.4 
 
 Summary:	%Summary
@@ -10,7 +10,6 @@ Release:	%release
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}-%{release}.tar.bz2
 Source1:	Clementine.conf
 Patch0:		clementine-0.6-use-default-language.patch
-#Patch1:		clementine-0.7.1-pt_BR_translations.patch
 License:	GPLv3
 Group:		Sound 
 URL:		http://www.clementine-player.org/
@@ -29,6 +28,7 @@ BuildRequires:	libimobiledevice-devel
 BuildRequires:	libindicate-qt-devel
 BuildRequires:	echonest-devel
 BuildRequires:	libgpod-devel >= 0.7.92
+BuildRequires:	libgstreamer-plugins-base0.10-devel
 
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
