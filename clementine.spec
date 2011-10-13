@@ -1,21 +1,12 @@
-%define branch 1
-%{?_branch: %{expand: %%global branch 1}}
+%define name    clementine
+%define version 0.7.1
+%define release 110911git
+%define Summary A cross-platform music player based on Amarok 1.4
 
-%if %branch
-%define git_snapshot 110911git
-%endif
-
-
-Name:    clementine
-Version: 0.7.1
-Summary: A cross-platform music player based on Amarok 1.4
-
-%if %branch
-Release:        %mkrel -c %git_snapshot 1
-%else
-Release:        %mkrel 1
-%endif
-
+Summary:    %Summary
+Name:       %name
+Version:    %version
+Release:    %release
 Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}-%{release}.tar.bz2
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
@@ -74,12 +65,7 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%if %branch
-%setup -q -n %{name}-%{version}-%{git_snapshot}
-%else
-%setup -q
-%endif
-
+%setup -q -n %{name}-%{version}-%{release}
 %apply_patches
 
 %build
