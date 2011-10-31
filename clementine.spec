@@ -28,7 +28,7 @@ BuildRequires:  libimobiledevice-devel
 BuildRequires:  libindicate-qt-devel
 BuildRequires:  echonest-devel
 BuildRequires:  libgpod-devel >= 0.7.92
-BuildRequires:  libgstreamer-plugins-base0.10-devel
+BuildRequires:  libgstreamer-plugins-base-devel
 
 Requires:   libprojectm-data
 Requires:   qt4-database-plugin-sqlite
