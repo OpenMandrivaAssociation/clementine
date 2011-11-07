@@ -6,7 +6,7 @@
 Summary:    %Summary
 Name:       %name
 Version:    %version
-Release:    %mkrel %rel.1
+Release:    %mkrel %rel.2
 Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}-%{rel}.tar.bz2
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
