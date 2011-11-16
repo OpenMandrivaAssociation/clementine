@@ -1,13 +1,8 @@
-%define name    clementine
-%define version 0.7.1
-%define rel 110911git
-%define Summary A cross-platform music player based on Amarok 1.4
-
-Summary:    %Summary
-Name:       %name
-Version:    %version
-Release:    %mkrel %rel.2
-Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}-%{rel}.tar.bz2
+Summary:    A cross-platform music player based on Amarok 1.4
+Name:       clementine
+Version:    0.7.1
+Release:    9
+Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
 License:    GPLv3
@@ -20,12 +15,14 @@ BuildRequires:  libboost-devel
 BuildRequires:  qt4-linguist
 BuildRequires:  gstreamer0.10-devel
 BuildRequires:  cmake
+BuildRequires:  gobject-introspection-devel
 BuildRequires:  glew-devel
 BuildRequires:  libmtp-devel
 BuildRequires:  usbmuxd-devel
+BuildRequires:  libprojectm-devel
 BuildRequires:  libplist-devel
 BuildRequires:  libimobiledevice-devel
-BuildRequires:  libindicate-qt-devel
+#BuildRequires:  libindicate-qt-devel
 BuildRequires:  echonest-devel
 BuildRequires:  libgpod-devel >= 0.7.92
 BuildRequires:  libgstreamer-plugins-base-devel
@@ -66,11 +63,15 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel}
+%setup -q -n %{name}-%{version}
 %apply_patches
 
 %build
-%cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF
+
+%cmake_qt4	-DBUNDLE_PROJECTM_PRESETS=OFF	\
+		-DBUILD_WERROR=OFF	\
+		-DSTATIC_SQLITE=OFF
+
 %make
 
 %install
@@ -79,7 +80,3 @@ Features:
 
 install -m 644 -D %{_sourcedir}/Clementine.conf \
 %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
-
-
-%clean
-%__rm -rf %buildroot
