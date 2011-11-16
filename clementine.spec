@@ -10,6 +10,7 @@ Release:    %git
 Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}-%{git}.tar.bz2
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
+Patch1:     glib_comment_fix.diff
 License:    GPLv3
 Group:      Sound
 URL:        http://www.clementine-player.org/
@@ -67,7 +68,9 @@ Features:
 
 %prep
 %setup -q -n %{name}-%{version}-%{git}
-%apply_patches
+%patch0 -p1
+%patch1 -p0
+
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF
