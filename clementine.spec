@@ -1,19 +1,16 @@
-%define name    clementine
-%define version 0.7.1
-%define git 111116git
-%define Summary A cross-platform music player based on Amarok 1.4
+%define git 1
 
-Summary:    %Summary
-Name:       %name
-Version:    %version
-Release:    %git
-Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}-%{git}.tar.bz2
+Name:       clementine
+Summary:    A cross-platform music player based on Amarok 1.4
+Group:      Sound
+Version:    0.7.1
+Release:    10
+License:    GPLv3
+URL:        http://www.clementine-player.org/
+Source0:    http://clementine-player.googlecode.com/files/%{name}%{?git:-20111117}%{?!git:-%{version}}.tar.bz2
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
-Patch1:     glib_comment_fix.diff
-License:    GPLv3
-Group:      Sound
-URL:        http://www.clementine-player.org/
+
 BuildRequires:  qt4-devel >= 4.5.0
 BuildRequires:  taglib-devel >= 1.6
 BuildRequires:  liblastfm-devel
@@ -30,7 +27,7 @@ BuildRequires:  libindicate-qt-devel
 BuildRequires:  echonest-devel
 BuildRequires:  libgpod-devel >= 0.7.92
 BuildRequires:  libgstreamer-plugins-base-devel
-
+BuildRequires:  libcdio-devel
 Requires:   libprojectm-data
 Requires:   qt4-database-plugin-sqlite
 Requires:   gstreamer0.10-flac
@@ -58,7 +55,6 @@ Features:
     * Queue manage
 
 %files
-%defattr(-,root,root)
 %_bindir/clementine
 %_datadir/applications/clementine.desktop
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
@@ -67,10 +63,8 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%setup -q -n %{name}-%{version}-%{git}
+%setup -q%{?git:n %{name}}
 %patch0 -p1
-%patch1 -p0
-
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF
@@ -83,6 +77,3 @@ Features:
 install -m 644 -D %{_sourcedir}/Clementine.conf \
 %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
 
-
-%clean
-%__rm -rf %buildroot
