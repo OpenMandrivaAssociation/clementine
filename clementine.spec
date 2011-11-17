@@ -60,6 +60,8 @@ Features:
 %_iconsdir/hicolor/64x64/apps/application-x-clementine.png
 %_iconsdir/hicolor/scalable/apps/application-x-clementine.svg
 %config %{_sysconfdir}/Clementine/Clementine.conf
+%doc %_defaultdocdir/HTML/*/%name 
+
 #---------------------------------------------------------------------
 
 %prep
