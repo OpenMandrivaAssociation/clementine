@@ -3,14 +3,13 @@
 Name:       clementine
 Summary:    A cross-platform music player based on Amarok 1.4
 Group:      Sound
-Version:    0.7.1
+Version:    1.0.0
 Release:    12
 License:    GPLv3
 URL:        http://www.clementine-player.org/
-Source0:    http://clementine-player.googlecode.com/files/%{name}%{?git:-20111117}%{?!git:-%{version}}.tar.bz2
+Source0:    http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:    Clementine.conf
 Patch0:     clementine-0.6-use-default-language.patch
-Patch1:     clementine-20111117_ru_translations.patch
 
 BuildRequires:  qt4-devel >= 4.5.0
 BuildRequires:  taglib-devel >= 1.6
@@ -65,16 +64,14 @@ Features:
 #---------------------------------------------------------------------
 
 %prep
-%setup -q%{?git:n %{name}}
+%setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF
 %make
 
 %install
-%__rm -rf %buildroot
 %makeinstall_std -C build
 
 install -m 644 -D %{_sourcedir}/Clementine.conf \
