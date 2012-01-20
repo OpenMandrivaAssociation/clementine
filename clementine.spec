@@ -2,7 +2,7 @@ Name:		clementine
 Summary:	A cross-platform music player based on Amarok 1.4
 Group:		Sound
 Version:	1.0.0
-Release:	3
+Release:	4
 License:	GPLv3
 URL:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
@@ -12,6 +12,7 @@ Patch0:		clementine-0.6-use-default-language.patch
 # - Now Playing widget (album art context menu) - current album
 # - Playlist (selected songs context menu) - unique selected albums
 Patch1:		clementine-1.0.0-metalarchives.patch
+Patch2:		clementine_clementineplayer_pt_BR.patch
 
 BuildRequires:	qt4-devel >= 4.5.0
 BuildRequires:	taglib-devel >= 1.6
@@ -69,6 +70,7 @@ Features:
 %setup -q
 %patch0 -p1
 %patch1 -p1 -b .ma~
+%patch2 -p1
 
 %build
 %cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF
