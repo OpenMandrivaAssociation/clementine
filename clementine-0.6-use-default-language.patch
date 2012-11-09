@@ -1,0 +1,23 @@
+--- clementine-0.6/src/main.cpp~       2010-12-09 11:06:00.000000000 -0200
++++ clementine-0.6/src/main.cpp        2011-02-02 14:56:44.070862000 -0200
+@@ -78,8 +78,17 @@ void LoadTranslation(const QString& pref
+     return;
+ #endif
+ 
+-  QString language = override_language.isEmpty() ?
+-                     QLocale::system().name() : override_language;
++  QString language;
++  if (override_language.isEmpty())
++         {
++                 language = QLocale::system().name();
++#if defined(Q_OS_UNIX)
++                 QString varlanguage = ::getenv("LANG");
++                 if (varlanguage.size())
++                         language = varlanguage.split(".").at(0);
++#endif
++         } else
++                 language = override_language;
+ 
+   QTranslator* t = new PoTranslator;
+   if (t->load(prefix + "_" + language, path))
+
