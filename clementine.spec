@@ -1,10 +1,12 @@
+%define	gstapi	0.10
+
 Name:		clementine
 Summary:	A cross-platform music player based on Amarok 1.4
 Group:		Sound
 Version:	1.1.1
 Release:	1
 License:	GPLv3
-URL:		http://www.clementine-player.org/
+Url:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	Clementine.conf
 Source2:	clementine-1.0.1-ru.po
@@ -18,32 +20,32 @@ Patch2:		clementine-1.0.0-coversize.patch
 # Fix desktop file
 Patch3:		clementine-1.1.0-fix-desktop.patch
 
-BuildRequires:	qt4-devel >= 4.5.0
-BuildRequires:	pkgconfig(taglib) >= 1.6
-BuildRequires:	liblastfm-devel
-BuildRequires:	boost-devel
-BuildRequires:	qt4-linguist
-BuildRequires:	pkgconfig(gstreamer-0.10)
 BuildRequires:	cmake
+BuildRequires:	qt4-linguist
+BuildRequires:	boost-devel
+BuildRequires:	liblastfm-devel
+BuildRequires:	qt4-devel >= 4.5.0
+BuildRequires:	pkgconfig(libechonest)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
-BuildRequires:	pkgconfig(libmtp)
-BuildRequires:	pkgconfig(libusbmuxd)
-BuildRequires:	pkgconfig(libplist)
+BuildRequires:	pkgconfig(gstreamer-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(libimobiledevice-1.0)
+BuildRequires:	pkgconfig(libcdio)
+BuildRequires:	pkgconfig(libgpod-1.0)
+BuildRequires:	pkgconfig(libmtp)
+BuildRequires:	pkgconfig(libplist)
+BuildRequires:	pkgconfig(libusbmuxd)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
-BuildRequires:	pkgconfig(libechonest)
-BuildRequires:	pkgconfig(libgpod-1.0)
-BuildRequires:	pkgconfig(gstreamer-plugins-base-0.10)
-BuildRequires:	pkgconfig(libcdio)
 BuildRequires:	pkgconfig(protobuf)
+BuildRequires:	pkgconfig(taglib) >= 1.6
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
-Requires:	gstreamer0.10-flac
-Requires:	gstreamer0.10-plugins-ugly
+Requires:	gstreamer%{gstapi}-flac
+Requires:	gstreamer%{gstapi}-plugins-ugly
 
-Suggests:	gstreamer0.10-decoders-audio
+Suggests:	gstreamer%{gstapi}-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
 # which is need at least to mount mtp devices (tested locally)
 Suggests:	gvfs-iphone
@@ -65,29 +67,25 @@ Features:
     * Queue manage
 
 %files
+%config %{_sysconfdir}/Clementine/Clementine.conf
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
 %{_datadir}/kde4/services/clementine-*.protocol
 %{_datadir}/applications/clementine.desktop
 %{_iconsdir}/hicolor/64x64/apps/application-x-clementine.png
 %{_iconsdir}/hicolor/scalable/apps/application-x-clementine.svg
-%config %{_sysconfdir}/Clementine/Clementine.conf
-
-
-#---------------------------------------------------------------------
 
 %prep
 %setup -q
 # Update russian translation
 # Needed only until next after 1.1.0 version is released
 cp -f %{SOURCE2} src/translations/ru.po
-%patch0 -p1
-%patch1 -p1 -b .ma~
-%patch2 -p1 -b .coversize~
-%patch3 -p1
+%apply_patches
 
 %build
-%cmake_qt4 -DBUNDLE_PROJECTM_PRESETS=OFF -DBUILD_WERROR=OFF
+%cmake_qt4 \
+	-DBUNDLE_PROJECTM_PRESETS=OFF \
+	-DBUILD_WERROR=OFF
 %make
 
 %install
