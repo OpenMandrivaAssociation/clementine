@@ -4,7 +4,7 @@ Name:		clementine
 Summary:	A cross-platform music player based on Amarok 1.4
 Group:		Sound
 Version:	1.1.1
-Release:	3
+Release:	4
 License:	GPLv3
 Url:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
@@ -19,6 +19,8 @@ Patch1:		clementine-1.1.0-metalarchives.patch
 Patch2:		clementine-1.0.0-coversize.patch
 # Fix desktop file
 Patch3:		clementine-1.1.0-fix-desktop.patch
+# Fix build with current libimobiledevice
+Patch4:		clementine-1.1.1-libimobiledevice-1.1.5.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
