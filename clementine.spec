@@ -42,6 +42,8 @@ BuildRequires:	pkgconfig(libusbmuxd)
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf)
 BuildRequires:	pkgconfig(taglib) >= 1.6
+# For Google Drive integration
+BuildRequires:	pkgconfig(libsparsehash)
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Requires:	gstreamer%{gstapi}-flac
