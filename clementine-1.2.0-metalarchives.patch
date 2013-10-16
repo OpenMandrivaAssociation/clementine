@@ -1,9 +1,9 @@
-diff -urN clementine-1.1.0/src/translations/ru.po clementine-1.1.0-patched/src/translations/ru.po
---- clementine-1.1.0/src/translations/ru.po	2012-10-22 06:24:28.000000000 +0000
-+++ clementine-1.1.0-patched/src/translations/ru.po	2012-10-26 02:44:02.312324182 +0000
-@@ -315,6 +315,10 @@
- msgid "ALL GLORY TO THE HYPNOTOAD"
- msgstr "ВСЯ СЛАВА ГИПНОЖАБЕ!"
+diff -urN clementine-1.2.0/src/translations/ru.po clementine-1.2.0-patched/src/translations/ru.po
+--- clementine-1.2.0/src/translations/ru.po	2013-10-13 11:28:17.000000000 +1100
++++ clementine-1.2.0-patched/src/translations/ru.po	2013-10-16 15:15:36.060612384 +1100
+@@ -383,6 +383,10 @@
+ msgid "Abort"
+ msgstr "Прервать"
  
 +#: widgets/nowplayingwidget.cpp:122
 +msgid "Search at metal-archives.com"
@@ -12,10 +12,10 @@ diff -urN clementine-1.1.0/src/translations/ru.po clementine-1.1.0-patched/src/t
  #: ui/about.cpp:32
  #, qt-format
  msgid "About %1"
-diff -urN clementine-1.1.0/src/ui/mainwindow.cpp clementine-1.1.0-patched/src/ui/mainwindow.cpp
---- clementine-1.1.0/src/ui/mainwindow.cpp	2012-10-22 06:24:28.000000000 +0000
-+++ clementine-1.1.0-patched/src/ui/mainwindow.cpp	2012-10-26 02:44:02.314324285 +0000
-@@ -128,6 +128,7 @@
+diff -urN clementine-1.2.0/src/ui/mainwindow.cpp clementine-1.2.0-patched/src/ui/mainwindow.cpp
+--- clementine-1.2.0/src/ui/mainwindow.cpp	2013-10-13 11:27:05.000000000 +1100
++++ clementine-1.2.0-patched/src/ui/mainwindow.cpp	2013-10-16 15:52:03.405480242 +1100
+@@ -132,6 +132,7 @@
  #include <QtDebug>
  #include <QTimer>
  #include <QUndoStack>
@@ -23,7 +23,7 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.cpp clementine-1.1.0-patched/src/ui
  
  #ifdef Q_OS_WIN32
  # include <qtsparkle/Updater>
-@@ -326,6 +327,8 @@
+@@ -336,6 +337,8 @@
    connect(ui_->action_selection_set_value, SIGNAL(triggered()), SLOT(SelectionSetValue()));
    connect(ui_->action_edit_value, SIGNAL(triggered()), SLOT(EditValue()));
    connect(ui_->action_auto_complete_tags, SIGNAL(triggered()), SLOT(AutoCompleteTags()));
@@ -32,32 +32,25 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.cpp clementine-1.1.0-patched/src/ui
    connect(ui_->action_configure, SIGNAL(triggered()), SLOT(OpenSettingsDialog()));
    connect(ui_->action_about, SIGNAL(triggered()), SLOT(ShowAboutDialog()));
    connect(ui_->action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
-@@ -486,6 +489,7 @@
-   playlist_menu_->addAction(ui_->action_renumber_tracks);
+@@ -499,6 +502,7 @@
    playlist_menu_->addAction(ui_->action_selection_set_value);
    playlist_menu_->addAction(ui_->action_auto_complete_tags);
+   playlist_menu_->addAction(ui_->action_add_files_to_transcoder);
 +  playlist_menu_->addAction(ui_->action_open_metalarchives);
    playlist_menu_->addSeparator();
    playlist_copy_to_library_ = playlist_menu_->addAction(IconLoader::Load("edit-copy"), tr("Copy to library..."), this, SLOT(PlaylistCopyToLibrary()));
    playlist_move_to_library_ = playlist_menu_->addAction(IconLoader::Load("go-jump"), tr("Move to library..."), this, SLOT(PlaylistMoveToLibrary()));
-@@ -523,6 +527,8 @@
-   connect(global_search_action, SIGNAL(triggered()),
-           SLOT(FocusGlobalSearchField()));
- 
-+  connect(ui_->action_metalarchives, SIGNAL(toggled(bool)), SLOT(EnableMA(bool)));
-+
-   // Internet connections
-   connect(app_->internet_model(), SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
-   connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl,Song)), app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl,Song)));
-@@ -653,6 +659,7 @@
+@@ -670,6 +674,9 @@
            SLOT(NowPlayingWidgetPositionChanged(bool)));
    connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
    connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
 +  connect(ui_->action_metalarchives, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableMA(bool)));
++  // and also Encyclopaedia Metallum for main playlist
++  connect(ui_->action_metalarchives, SIGNAL(toggled(bool)), SLOT(EnableMA(bool)));
+   // Hide the console
+   //connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
    NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
- 
-   // Load theme
-@@ -2147,6 +2154,28 @@
+@@ -2235,6 +2242,28 @@
    ui_->playlist->view()->update();
  }
  
@@ -86,12 +79,12 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.cpp clementine-1.1.0-patched/src/ui
  QPixmap MainWindow::CreateOverlayedIcon(int position, int scrobble_point) {
    QPixmap normal_icon = QIcon(":/last.fm/as_light.png").pixmap(16);
    QPixmap light_icon = QIcon(":/last.fm/as.png").pixmap(16);
-diff -urN clementine-1.1.0/src/ui/mainwindow.h clementine-1.1.0-patched/src/ui/mainwindow.h
---- clementine-1.1.0/src/ui/mainwindow.h	2012-10-22 06:24:28.000000000 +0000
-+++ clementine-1.1.0-patched/src/ui/mainwindow.h	2012-10-26 02:44:02.314324285 +0000
-@@ -157,6 +157,9 @@
-   void AutoCompleteTagsAccepted();
+diff -urN clementine-1.2.0/src/ui/mainwindow.h clementine-1.2.0-patched/src/ui/mainwindow.h
+--- clementine-1.2.0/src/ui/mainwindow.h	2013-10-13 11:27:05.000000000 +1100
++++ clementine-1.2.0-patched/src/ui/mainwindow.h	2013-10-16 15:15:36.062612388 +1100
+@@ -160,6 +160,9 @@
    void PlaylistUndoRedoChanged(QAction* undo, QAction* redo);
+   void AddFilesToTranscoder();
  
 +  void EnableMA(bool metalarchives);
 +  void SearchMA();
@@ -99,18 +92,18 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.h clementine-1.1.0-patched/src/ui/m
    void PlaylistCopyToLibrary();
    void PlaylistMoveToLibrary();
    void PlaylistCopyToDevice();
-diff -urN clementine-1.1.0/src/ui/mainwindow.ui clementine-1.1.0-patched/src/ui/mainwindow.ui
---- clementine-1.1.0/src/ui/mainwindow.ui	2012-10-22 06:24:28.000000000 +0000
-+++ clementine-1.1.0-patched/src/ui/mainwindow.ui	2012-10-26 02:44:02.315324333 +0000
+diff -urN clementine-1.2.0/src/ui/mainwindow.ui clementine-1.2.0-patched/src/ui/mainwindow.ui
+--- clementine-1.2.0/src/ui/mainwindow.ui	2013-10-13 11:27:05.000000000 +1100
++++ clementine-1.2.0-patched/src/ui/mainwindow.ui	2013-10-16 15:18:33.083387648 +1100
 @@ -474,6 +474,7 @@
      <addaction name="action_hypnotoad"/>
      <addaction name="action_enterprise"/>
      <addaction name="action_kittens"/>
 +    <addaction name="action_metalarchives"/>
-     <addaction name="separator"/>
-    </widget>
-    <widget class="QMenu" name="menu_tools">
-@@ -711,6 +712,14 @@
+     <!-- Hide the console
+     <addaction name="action_console"/>
+     -->
+@@ -714,6 +715,14 @@
      <string comment="Label for buton to enable/disable kittens in the now playing widget">Kittens</string>
     </property>
    </action>
@@ -122,10 +115,10 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.ui clementine-1.1.0-patched/src/ui/
 +    <string comment="Label for buton to enable/disable search at metal-archives.com in the now playing widget menu">Encyclopaedia Metallum</string>
 +   </property>
 +  </action>
-   <action name="action_shuffle_mode">
+   <action name="action_console">
     <property name="text">
-     <string>&amp;Shuffle mode</string>
-@@ -834,6 +843,11 @@
+     <string>Console</string>
+@@ -842,6 +851,11 @@
      <string>Ctrl+T</string>
     </property>
    </action>
@@ -137,9 +130,9 @@ diff -urN clementine-1.1.0/src/ui/mainwindow.ui clementine-1.1.0-patched/src/ui/
    <action name="action_toggle_scrobbling">
     <property name="text">
      <string>Toggle scrobbling</string>
-diff -urN clementine-1.1.0/src/widgets/nowplayingwidget.cpp clementine-1.1.0-patched/src/widgets/nowplayingwidget.cpp
---- clementine-1.1.0/src/widgets/nowplayingwidget.cpp	2012-10-11 11:16:40.000000000 +0000
-+++ clementine-1.1.0-patched/src/widgets/nowplayingwidget.cpp	2012-10-26 02:44:02.316324377 +0000
+diff -urN clementine-1.2.0/src/widgets/nowplayingwidget.cpp clementine-1.2.0-patched/src/widgets/nowplayingwidget.cpp
+--- clementine-1.2.0/src/widgets/nowplayingwidget.cpp	2013-10-13 11:27:05.000000000 +1100
++++ clementine-1.2.0-patched/src/widgets/nowplayingwidget.cpp	2013-10-16 15:15:36.063612393 +1100
 @@ -35,6 +35,7 @@
  #include <QTextDocument>
  #include <QTimeLine>
@@ -191,9 +184,9 @@ diff -urN clementine-1.1.0/src/widgets/nowplayingwidget.cpp clementine-1.1.0-pat
  void NowPlayingWidget::Bask() {
    big_hypnotoad_.reset(new FullscreenHypnotoad);
    big_hypnotoad_->showFullScreen();
-diff -urN clementine-1.1.0/src/widgets/nowplayingwidget.h clementine-1.1.0-patched/src/widgets/nowplayingwidget.h
---- clementine-1.1.0/src/widgets/nowplayingwidget.h	2012-10-11 11:16:40.000000000 +0000
-+++ clementine-1.1.0-patched/src/widgets/nowplayingwidget.h	2012-10-26 02:44:02.317324419 +0000
+diff -urN clementine-1.2.0/src/widgets/nowplayingwidget.h clementine-1.2.0-patched/src/widgets/nowplayingwidget.h
+--- clementine-1.2.0/src/widgets/nowplayingwidget.h	2012-04-14 00:44:57.000000000 +1100
++++ clementine-1.2.0-patched/src/widgets/nowplayingwidget.h	2013-10-16 15:15:36.063612393 +1100
 @@ -73,6 +73,7 @@
    void Stopped();
    void AllHail(bool hypnotoad);

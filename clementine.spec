@@ -1,54 +1,68 @@
-%define	gstapi	0.10
+######################
+# Hardcode PLF build
+%bcond_with plf
+######################
 
-Name:		clementine
+%if %{with plf}
+# make EVR of plf build higher than regular to allow update, needed with rpm5 mkrel
+%define extrarelsuffix plf
+%endif
+
+%define gstapi 0.10
+
 Summary:	A cross-platform music player based on Amarok 1.4
+Name:		clementine
+Version:	1.2.0
+Release:	3%{?extrarelsuffix}
+License:	GPLv3+
 Group:		Sound
-Version:	1.1.1
-Release:	5
-License:	GPLv3
 Url:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	Clementine.conf
-Source2:	clementine-1.0.1-ru.po
-Patch0:		clementine-0.6-use-default-language.patch
+Patch0:		clementine-1.2.0-libmygpo-qt.patch
 # Search albums at metal-archives.com (Encyclopaedia Metallum) from:
 # - Now Playing widget (album art context menu) - current album
 # - Playlist (selected songs context menu) - unique selected albums
-Patch1:		clementine-1.1.0-metalarchives.patch
+Patch1:		clementine-1.2.0-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 Patch2:		clementine-1.0.0-coversize.patch
-# Fix desktop file
-Patch3:		clementine-1.1.0-fix-desktop.patch
-# Fix build with current libimobiledevice
-Patch4:		clementine-1.1.1-libimobiledevice-1.1.5.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	qt4-devel >= 4.5.0
-BuildRequires:	pkgconfig(libechonest)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
+BuildRequires:	pkgconfig(gstreamer-cdda-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
-BuildRequires:	pkgconfig(libimobiledevice-1.0)
+BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi})
+BuildRequires:	pkgconfig(libavcodec)
+BuildRequires:	pkgconfig(libavutil)
 BuildRequires:	pkgconfig(libcdio)
+BuildRequires:	pkgconfig(libchromaprint)
+BuildRequires:	pkgconfig(libechonest)
 BuildRequires:	pkgconfig(libgpod-1.0)
 BuildRequires:	pkgconfig(libmtp)
+BuildRequires:	pkgconfig(libmygpo-qt)
 BuildRequires:	pkgconfig(libplist)
+# For Google Drive integration
+BuildRequires:	pkgconfig(libsparsehash)
+%if %{with plf}
+BuildRequires:	pkgconfig(libspotify)
+%endif
 BuildRequires:	pkgconfig(libusbmuxd)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf)
+BuildRequires:	pkgconfig(qca2)
+BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
-# For Google Drive integration
-BuildRequires:	pkgconfig(libsparsehash)
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Requires:	gstreamer%{gstapi}-flac
 Requires:	gstreamer%{gstapi}-plugins-ugly
-
 Suggests:	gstreamer%{gstapi}-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
 # which is need at least to mount mtp devices (tested locally)
@@ -78,13 +92,17 @@ Features:
 %{_datadir}/applications/clementine.desktop
 %{_iconsdir}/hicolor/64x64/apps/application-x-clementine.png
 %{_iconsdir}/hicolor/scalable/apps/application-x-clementine.svg
+%if %{with plf}
+%{_bindir}/clementine-spotifyblob
+%endif
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
-# Update russian translation
-# Needed only until next after 1.1.0 version is released
-cp -f %{SOURCE2} src/translations/ru.po
-%apply_patches
+%patch0 -p1 -b .mygpo~
+%patch1 -p1 -b .ma~
+%patch2 -p1 -b .coversize~
 
 %build
 %cmake_qt4 \
@@ -96,3 +114,8 @@ cp -f %{SOURCE2} src/translations/ru.po
 %makeinstall_std -C build
 
 install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
+
+%if %{with plf}
+# Ugly hack, not sure why that file appears
+rm -rf %{buildroot}/home
+%endif
