@@ -8,17 +8,22 @@
 %define extrarelsuffix plf
 %endif
 
+%bcond_without vkontakte
+
 %define gstapi 0.10
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.0
-Release:	3%{?extrarelsuffix}
+Release:	4%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	Clementine.conf
+%if %{with vkontakte}
+Source2:	vk.png
+%endif
 Patch0:		clementine-1.2.0-libmygpo-qt.patch
 # Search albums at metal-archives.com (Encyclopaedia Metallum) from:
 # - Now Playing widget (album art context menu) - current album
@@ -26,6 +31,8 @@ Patch0:		clementine-1.2.0-libmygpo-qt.patch
 Patch1:		clementine-1.2.0-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 Patch2:		clementine-1.0.0-coversize.patch
+# VKontakte (vk.com) support from http://code.google.com/r/semenoffandrew-vk/
+Patch3:		clementine-1.2.0-vkontakte.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -59,6 +66,8 @@ BuildRequires:	pkgconfig(protobuf)
 BuildRequires:	pkgconfig(qca2)
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
+BuildRequires:	pkgconfig(vreen)
+BuildRequires:	pkgconfig(vreenoauth)
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
 Requires:	gstreamer%{gstapi}-flac
@@ -103,6 +112,11 @@ Features:
 %patch0 -p1 -b .mygpo~
 %patch1 -p1 -b .ma~
 %patch2 -p1 -b .coversize~
+
+%if %{with vkontakte}
+%patch3 -p1 -b .vkontakte~
+cp %{SOURCE2} data/providers/vk.png
+%endif
 
 %build
 %cmake_qt4 \
