@@ -117,5 +117,6 @@ install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.co
 
 %if %{with plf}
 # Ugly hack, not sure why that file appears
+rm -rf %{buildroot}/builddir
 rm -rf %{buildroot}/home
 %endif
