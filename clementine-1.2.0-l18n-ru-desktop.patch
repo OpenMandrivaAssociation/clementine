@@ -1,0 +1,15 @@
+diff -urN clementine-1.2.0/dist/clementine.desktop clementine-1.2.0-patched/dist/clementine.desktop
+--- clementine-1.2.0/dist/clementine.desktop	2013-10-13 11:27:04.000000000 +1100
++++ clementine-1.2.0-patched/dist/clementine.desktop	2013-10-22 21:03:41.457857657 +1100
+@@ -5,9 +5,11 @@
+ GenericName=Clementine Music Player
+ GenericName[pl]=Odtwarzacz muzyki Clementine
+ GenericName[pt]=Reprodutor de músicas Clementine
++GenericName[ru]=Музыкальный проигрыватель Clementine
+ Comment=Plays music and last.fm streams
+ Comment[pl]=Odtwarzanie muzyki i strumieni last.fm
+ Comment[pt]=Reprodução de músicas e emissões last.fm
++Comment[ru]=Слушайте музыку и потоки с last.fm
+ Exec=clementine %U
+ TryExec=clementine
+ Icon=application-x-clementine

@@ -1,0 +1,15 @@
+diff -urN clementine-1.2.0/src/core/song.cpp clementine-1.2.0-patched/src/core/song.cpp
+--- clementine-1.2.0/src/core/song.cpp	2013-10-13 11:27:04.000000000 +1100
++++ clementine-1.2.0-patched/src/core/song.cpp	2013-10-22 20:59:49.732669703 +1100
+@@ -729,6 +729,11 @@
+     return;
+   }
+ 
++  if (d->url_.scheme() == "http" && d->url_.toString().contains("vk.me")) {
++    // Don't bother to read tags for vk.com music files because we set them manually
++    return;
++  }
++
+   d->valid_ = true;
+   if (!bundle.title.isEmpty()) d->title_ = bundle.title;
+   if (!bundle.artist.isEmpty()) d->artist_ = bundle.artist;

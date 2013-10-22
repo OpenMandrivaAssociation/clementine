@@ -15,7 +15,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.0
-Release:	4%{?extrarelsuffix}
+Release:	5%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -33,6 +33,9 @@ Patch1:		clementine-1.2.0-metalarchives.patch
 Patch2:		clementine-1.0.0-coversize.patch
 # VKontakte (vk.com) support from http://code.google.com/r/semenoffandrew-vk/
 Patch3:		clementine-1.2.0-vkontakte.patch
+Patch4:		clementine-1.2.0-vkontakte-tags.patch
+# Localization issues
+Patch10:	clementine-1.2.0-l18n-ru-desktop.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -115,8 +118,11 @@ Features:
 
 %if %{with vkontakte}
 %patch3 -p1 -b .vkontakte~
+%patch4 -p1 -b .vkontakte~
 cp %{SOURCE2} data/providers/vk.png
 %endif
+
+%patch10 -p1
 
 %build
 %cmake_qt4 \
