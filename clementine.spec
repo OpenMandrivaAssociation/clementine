@@ -15,14 +15,14 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.0
-Release:	5%{?extrarelsuffix}
+Release:	6%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
 Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
 Source1:	Clementine.conf
 %if %{with vkontakte}
-Source2:	vk.png
+Source2:	clementine-1.2.0-vk-files.tar.bz2
 %endif
 Patch0:		clementine-1.2.0-libmygpo-qt.patch
 # Search albums at metal-archives.com (Encyclopaedia Metallum) from:
@@ -31,11 +31,13 @@ Patch0:		clementine-1.2.0-libmygpo-qt.patch
 Patch1:		clementine-1.2.0-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 Patch2:		clementine-1.0.0-coversize.patch
-# VKontakte (vk.com) support from http://code.google.com/r/semenoffandrew-vk/
-Patch3:		clementine-1.2.0-vkontakte.patch
+# VKontakte (vk.com) support from http://code.google.com/r/shedwardx-clementine-experiments/
+# With some ROSA adjustments (use system vreen library etc)
+Patch3:		clementine-1.2.0-vkontakte-advanced.patch
 Patch4:		clementine-1.2.0-vkontakte-tags.patch
 # Localization issues
-Patch10:	clementine-1.2.0-l18n-ru-desktop.patch
+Patch5:		clementine-1.2.0-l10n-ru-vkontakte.patch
+Patch10:	clementine-1.2.0-l10n-ru-desktop.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -117,9 +119,10 @@ Features:
 %patch2 -p1 -b .coversize~
 
 %if %{with vkontakte}
+tar -xf %{SOURCE2}
 %patch3 -p1 -b .vkontakte~
 %patch4 -p1 -b .vkontakte~
-cp %{SOURCE2} data/providers/vk.png
+%patch5 -p1 -b .vkontakte~
 %endif
 
 %patch10 -p1
@@ -140,3 +143,5 @@ install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.co
 rm -rf %{buildroot}/builddir
 rm -rf %{buildroot}/home
 %endif
+
+

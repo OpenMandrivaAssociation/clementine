@@ -5,7 +5,7 @@ diff -urN clementine-1.2.0/src/core/song.cpp clementine-1.2.0-patched/src/core/s
      return;
    }
  
-+  if (d->url_.scheme() == "http" && d->url_.toString().contains("vk.me")) {
++  if (d->url_.scheme() == "vk") {
 +    // Don't bother to read tags for vk.com music files because we set them manually
 +    return;
 +  }
