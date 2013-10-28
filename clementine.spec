@@ -15,7 +15,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.0
-Release:	6%{?extrarelsuffix}
+Release:	8%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -38,6 +38,7 @@ Patch4:		clementine-1.2.0-vkontakte-tags.patch
 # Localization issues
 Patch5:		clementine-1.2.0-l10n-ru-vkontakte.patch
 Patch10:	clementine-1.2.0-l10n-ru-desktop.patch
+Patch11:	clementine-1.2.0-l10n-ru-search.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -92,7 +93,7 @@ Features:
     * Tabbed playlists, import and export M3U, XSPF, PLS and ASX
     * Visualisations from projectM
     * Transcode music into MP3, Ogg Vorbis, Ogg Speex, FLAC or AAC
-    * Edit tags on MP3 and OGG files, organise your music
+    * Edit tags on MP3 and OGG files, organize your music
     * Download missing album cover art from Last.fm
     * Remote control using a Wii Remote, MPRIS or the command-line
     * Copy music to your iPod, iPhone, MTP or mass-storage USB player
@@ -125,7 +126,8 @@ tar -xf %{SOURCE2}
 %patch5 -p1 -b .vkontakte~
 %endif
 
-%patch10 -p1
+%patch10 -p1 -b .l10n~
+%patch11 -p1 -b .l10n~
 
 %build
 %cmake_qt4 \
@@ -143,5 +145,4 @@ install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.co
 rm -rf %{buildroot}/builddir
 rm -rf %{buildroot}/home
 %endif
-
 
