@@ -1,7 +1,7 @@
-diff -urN clementine-1.2.0/CMakeLists.txt clementine-1.2.0-patched/CMakeLists.txt
---- clementine-1.2.0/CMakeLists.txt	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/CMakeLists.txt	2013-10-24 21:30:58.705849174 +1100
-@@ -217,6 +217,8 @@
+diff -urN Clementine-1.2.2/CMakeLists.txt Clementine-1.2.2-patched/CMakeLists.txt
+--- Clementine-1.2.2/CMakeLists.txt	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/CMakeLists.txt	2014-03-04 01:52:12.928492021 +1100
+@@ -203,6 +203,8 @@
    DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
  )
  
@@ -10,7 +10,7 @@ diff -urN clementine-1.2.0/CMakeLists.txt clementine-1.2.0-patched/CMakeLists.tx
  optional_component(AUDIOCD ON "Devices: Audio CD support"
    DEPENDS "libcdio" CDIO_FOUND
  )
-@@ -282,6 +284,11 @@
+@@ -268,6 +270,11 @@
    find_package(Qt4 REQUIRED QtDbus)
  endif ()
  
@@ -22,9 +22,9 @@ diff -urN clementine-1.2.0/CMakeLists.txt clementine-1.2.0-patched/CMakeLists.tx
  # We can include the Qt definitions now
  include(${QT_USE_FILE})
  
-diff -urN clementine-1.2.0/data/data.qrc clementine-1.2.0-patched/data/data.qrc
---- clementine-1.2.0/data/data.qrc	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/data/data.qrc	2013-10-24 21:29:27.231389634 +1100
+diff -urN Clementine-1.2.2/data/data.qrc Clementine-1.2.2-patched/data/data.qrc
+--- Clementine-1.2.2/data/data.qrc	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/data/data.qrc	2014-03-04 01:52:12.928492021 +1100
 @@ -401,5 +401,23 @@
          <file>volumeslider-handle_glow.png</file>
          <file>volumeslider-handle.png</file>
@@ -49,10 +49,10 @@ diff -urN clementine-1.2.0/data/data.qrc clementine-1.2.0-patched/data/data.qrc
 +        <file>vk/link.png</file>
      </qresource>
  </RCC>
-diff -urN clementine-1.2.0/src/CMakeLists.txt clementine-1.2.0-patched/src/CMakeLists.txt
---- clementine-1.2.0/src/CMakeLists.txt	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/src/CMakeLists.txt	2013-10-24 21:32:13.487042671 +1100
-@@ -1130,6 +1130,27 @@
+diff -urN Clementine-1.2.2/src/CMakeLists.txt Clementine-1.2.2-patched/src/CMakeLists.txt
+--- Clementine-1.2.2/src/CMakeLists.txt	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/CMakeLists.txt	2014-03-04 01:52:12.928492021 +1100
+@@ -1131,6 +1131,27 @@
      internet/boxsettingspage.ui
  )
  
@@ -80,7 +80,7 @@ diff -urN clementine-1.2.0/src/CMakeLists.txt clementine-1.2.0-patched/src/CMake
  # Hack to add Clementine to the Unity system tray whitelist
  optional_source(LINUX
    SOURCES core/ubuntuunityhack.cpp
-@@ -1196,6 +1217,10 @@
+@@ -1197,6 +1218,10 @@
    Qocoa
  )
  
@@ -91,9 +91,9 @@ diff -urN clementine-1.2.0/src/CMakeLists.txt clementine-1.2.0-patched/src/CMake
  if(ENABLE_VISUALISATIONS)
    target_link_libraries(clementine_lib ${LIBPROJECTM_LIBRARIES})
  endif(ENABLE_VISUALISATIONS)
-diff -urN clementine-1.2.0/src/config.h.in clementine-1.2.0-patched/src/config.h.in
---- clementine-1.2.0/src/config.h.in	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/src/config.h.in	2013-10-24 21:29:27.232389649 +1100
+diff -urN Clementine-1.2.2/src/config.h.in Clementine-1.2.2-patched/src/config.h.in
+--- Clementine-1.2.2/src/config.h.in	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/config.h.in	2014-03-04 01:52:12.929492037 +1100
 @@ -42,6 +42,7 @@
  #cmakedefine HAVE_SPOTIFY_DOWNLOADER
  #cmakedefine HAVE_STATIC_SQLITE
@@ -102,9 +102,9 @@ diff -urN clementine-1.2.0/src/config.h.in clementine-1.2.0-patched/src/config.h
  #cmakedefine HAVE_WIIMOTEDEV
  #cmakedefine IMOBILEDEVICE_USES_UDIDS
  #cmakedefine TAGLIB_HAS_OPUS
-diff -urN clementine-1.2.0/src/core/metatypes.cpp clementine-1.2.0-patched/src/core/metatypes.cpp
---- clementine-1.2.0/src/core/metatypes.cpp	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/src/core/metatypes.cpp	2013-10-24 21:29:27.232389649 +1100
+diff -urN Clementine-1.2.2/src/core/metatypes.cpp Clementine-1.2.2-patched/src/core/metatypes.cpp
+--- Clementine-1.2.2/src/core/metatypes.cpp	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/core/metatypes.cpp	2014-03-04 01:52:12.929492037 +1100
 @@ -16,6 +16,10 @@
  #include "podcasts/podcast.h"
  #include "ui/equalizer.h"
@@ -128,9 +128,9 @@ diff -urN clementine-1.2.0/src/core/metatypes.cpp clementine-1.2.0-patched/src/c
  #ifdef HAVE_DBUS
    qDBusRegisterMetaType<QImage>();
    qDBusRegisterMetaType<TrackMetadata>();
-diff -urN clementine-1.2.0/src/internet/internetmodel.cpp clementine-1.2.0-patched/src/internet/internetmodel.cpp
---- clementine-1.2.0/src/internet/internetmodel.cpp	2013-10-13 11:27:04.000000000 +1100
-+++ clementine-1.2.0-patched/src/internet/internetmodel.cpp	2013-10-24 21:29:27.233389666 +1100
+diff -urN Clementine-1.2.2/src/internet/internetmodel.cpp Clementine-1.2.2-patched/src/internet/internetmodel.cpp
+--- Clementine-1.2.2/src/internet/internetmodel.cpp	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/internet/internetmodel.cpp	2014-03-04 01:52:12.929492037 +1100
 @@ -56,6 +56,9 @@
  #ifdef HAVE_BOX
    #include "boxservice.h"
@@ -151,9 +151,9 @@ diff -urN clementine-1.2.0/src/internet/internetmodel.cpp clementine-1.2.0-patch
  }
  
  void InternetModel::AddService(InternetService *service) {
-diff -urN clementine-1.2.0/src/internet/searchboxwidget.cpp clementine-1.2.0-patched/src/internet/searchboxwidget.cpp
---- clementine-1.2.0/src/internet/searchboxwidget.cpp	2012-10-25 16:49:50.000000000 +1100
-+++ clementine-1.2.0-patched/src/internet/searchboxwidget.cpp	2013-10-24 21:29:27.233389666 +1100
+diff -urN Clementine-1.2.2/src/internet/searchboxwidget.cpp Clementine-1.2.2-patched/src/internet/searchboxwidget.cpp
+--- Clementine-1.2.2/src/internet/searchboxwidget.cpp	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/internet/searchboxwidget.cpp	2014-03-04 01:52:12.929492037 +1100
 @@ -59,6 +59,11 @@
    QApplication::sendEvent(ui_->filter, event);
  }
@@ -166,9 +166,9 @@ diff -urN clementine-1.2.0/src/internet/searchboxwidget.cpp clementine-1.2.0-pat
  void SearchBoxWidget::keyReleaseEvent(QKeyEvent* e) {
    switch (e->key()) {
      case Qt::Key_Escape:
-diff -urN clementine-1.2.0/src/internet/searchboxwidget.h clementine-1.2.0-patched/src/internet/searchboxwidget.h
---- clementine-1.2.0/src/internet/searchboxwidget.h	2012-10-25 16:49:50.000000000 +1100
-+++ clementine-1.2.0-patched/src/internet/searchboxwidget.h	2013-10-24 21:29:27.233389666 +1100
+diff -urN Clementine-1.2.2/src/internet/searchboxwidget.h Clementine-1.2.2-patched/src/internet/searchboxwidget.h
+--- Clementine-1.2.2/src/internet/searchboxwidget.h	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/internet/searchboxwidget.h	2014-03-04 01:52:12.929492037 +1100
 @@ -41,6 +41,7 @@
  
  public slots:
@@ -177,12 +177,12 @@ diff -urN clementine-1.2.0/src/internet/searchboxwidget.h clementine-1.2.0-patch
  
  protected:
    void keyReleaseEvent(QKeyEvent* e);
-diff -urN clementine-1.2.0/src/ui/mainwindow.cpp clementine-1.2.0-patched/src/ui/mainwindow.cpp
---- clementine-1.2.0/src/ui/mainwindow.cpp	2013-10-13 11:27:05.000000000 +1100
-+++ clementine-1.2.0-patched/src/ui/mainwindow.cpp	2013-10-24 21:29:27.238389745 +1100
-@@ -117,6 +117,10 @@
- # include "moodbar/moodbarproxystyle.h"
- #endif
+diff -urN Clementine-1.2.2/src/ui/mainwindow.cpp Clementine-1.2.2-patched/src/ui/mainwindow.cpp
+--- Clementine-1.2.2/src/ui/mainwindow.cpp	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/ui/mainwindow.cpp	2014-03-04 01:52:12.930492052 +1100
+@@ -21,6 +21,10 @@
+ #include <cmath>
+ #include <memory>
  
 +#ifdef HAVE_VK
 +# include "internet/vkservice.h"
@@ -191,7 +191,7 @@ diff -urN clementine-1.2.0/src/ui/mainwindow.cpp clementine-1.2.0-patched/src/ui
  #include <QCloseEvent>
  #include <QDir>
  #include <QFileDialog>
-@@ -328,6 +332,10 @@
+@@ -318,6 +322,10 @@
    connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
    connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), InternetModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
  #endif
@@ -202,9 +202,9 @@ diff -urN clementine-1.2.0/src/ui/mainwindow.cpp clementine-1.2.0-patched/src/ui
    connect(ui_->action_clear_playlist, SIGNAL(triggered()), app_->playlist_manager(), SLOT(ClearCurrent()));
    connect(ui_->action_remove_duplicates, SIGNAL(triggered()), app_->playlist_manager(), SLOT(RemoveDuplicatesCurrent()));
    connect(ui_->action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
-diff -urN clementine-1.2.0/src/ui/settingsdialog.cpp clementine-1.2.0-patched/src/ui/settingsdialog.cpp
---- clementine-1.2.0/src/ui/settingsdialog.cpp	2013-10-13 11:27:05.000000000 +1100
-+++ clementine-1.2.0-patched/src/ui/settingsdialog.cpp	2013-10-24 21:29:27.238389745 +1100
+diff -urN Clementine-1.2.2/src/ui/settingsdialog.cpp Clementine-1.2.2-patched/src/ui/settingsdialog.cpp
+--- Clementine-1.2.2/src/ui/settingsdialog.cpp	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/ui/settingsdialog.cpp	2014-03-04 01:52:12.930492052 +1100
 @@ -76,6 +76,10 @@
  #  include "internet/boxsettingspage.h"
  #endif
@@ -228,9 +228,9 @@ diff -urN clementine-1.2.0/src/ui/settingsdialog.cpp clementine-1.2.0-patched/sr
    AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
    AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
    AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
-diff -urN clementine-1.2.0/src/ui/settingsdialog.h clementine-1.2.0-patched/src/ui/settingsdialog.h
---- clementine-1.2.0/src/ui/settingsdialog.h	2013-10-13 11:27:05.000000000 +1100
-+++ clementine-1.2.0-patched/src/ui/settingsdialog.h	2013-10-24 21:29:27.238389745 +1100
+diff -urN Clementine-1.2.2/src/ui/settingsdialog.h Clementine-1.2.2-patched/src/ui/settingsdialog.h
+--- Clementine-1.2.2/src/ui/settingsdialog.h	2014-02-07 01:35:36.000000000 +1100
++++ Clementine-1.2.2-patched/src/ui/settingsdialog.h	2014-03-04 01:52:12.930492052 +1100
 @@ -84,6 +84,7 @@
      Page_Dropbox,
      Page_Skydrive,
