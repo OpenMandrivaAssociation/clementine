@@ -3,24 +3,15 @@
 Name:		clementine
 Summary:	A cross-platform music player based on Amarok 1.4
 Group:		Sound
-Version:	1.1.1
-Release:	5
+Version:	1.2.2
+Release:	1
 License:	GPLv3
 Url:		http://www.clementine-player.org/
-Source0:	http://clementine-player.googlecode.com/files/%{name}-%{version}.tar.gz
+Source0:	https://codeload.github.com/clementine-player/Clementine/tar.gz/%{version}.tar.gz
 Source1:	Clementine.conf
-Source2:	clementine-1.0.1-ru.po
-Patch0:		clementine-0.6-use-default-language.patch
-# Search albums at metal-archives.com (Encyclopaedia Metallum) from:
-# - Now Playing widget (album art context menu) - current album
-# - Playlist (selected songs context menu) - unique selected albums
-Patch1:		clementine-1.1.0-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
-Patch2:		clementine-1.0.0-coversize.patch
-# Fix desktop file
-Patch3:		clementine-1.1.0-fix-desktop.patch
-# Fix build with current libimobiledevice
-Patch4:		clementine-1.1.1-libimobiledevice-1.1.5.patch
+Patch1:		clementine-1.0.0-coversize.patch
+Patch2:		clementine-1.2.2-upstream-missing-includes.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -80,10 +71,7 @@ Features:
 %{_iconsdir}/hicolor/scalable/apps/application-x-clementine.svg
 
 %prep
-%setup -q
-# Update russian translation
-# Needed only until next after 1.1.0 version is released
-cp -f %{SOURCE2} src/translations/ru.po
+%setup -q -n Clementine-%{version}
 %apply_patches
 
 %build
