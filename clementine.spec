@@ -133,11 +133,12 @@ tar -xf %{SOURCE2}
 
 %patch12 -p1 -b .gcc47~
 
-%build
+%build 
+%global optflags %optflags -std=c++11
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
-	-DBUILD_WERROR=OFF \
-    -std=c++11
+	-DBUILD_WERROR=OFF
+    
 %make VERBOSE=1
 
 %install
