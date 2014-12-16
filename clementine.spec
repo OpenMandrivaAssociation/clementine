@@ -136,7 +136,8 @@ tar -xf %{SOURCE2}
 %build
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
-	-DBUILD_WERROR=OFF
+	-DBUILD_WERROR=OFF \
+    -std=c++11
 %make VERBOSE=1
 
 %install
