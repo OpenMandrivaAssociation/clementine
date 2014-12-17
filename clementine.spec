@@ -132,13 +132,12 @@ tar -xf %{SOURCE2}
 %patch11 -p1 -b .l10n~
 
 %patch12 -p1 -b .gcc47~
-
+%global optflags %optflags -D__STRICT_ANSI__
 
 %build 
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
-	-DBUILD_WERROR=OFF \
-    -D__STRICT_ANSI__
+	-DBUILD_WERROR=OFF   
     
 %make VERBOSE=1
 
