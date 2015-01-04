@@ -8,19 +8,25 @@
 %define extrarelsuffix plf
 %endif
 
-%bcond_without vkontakte
+%bcond_with vkontakte
 
-%define gstapi 0.10
+%define gstapi 1.0
 %define oname Clementine
 
+%define git 2cc560ff1e939a1c5f4b08c9504e26b9e23ca242
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.2.3
-Release:	1%{?extrarelsuffix}
+Version:	1.2.4git
+Release:	0.1%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
-Source0:	http://clementine-player.googlecode.com/files/%{oname}-%{version}.tar.gz
+%if "%git"
+Source0:	http://github.com/clementine-player/Clementine/archive/%{oname}-%{git}.tar.gz
+%else
+Source0:	http://github.com/clementine-player/%{oname}/archive/%{oname}-%{version}.tar.gz
+%endif
+
 Source1:	Clementine.conf
 %if %{with vkontakte}
 Source2:	clementine-1.2.0-vk-files.tar.bz2
@@ -40,7 +46,6 @@ Patch4:		clementine-1.2.0-vkontakte-tags.patch
 Patch5:		clementine-1.2.0-l10n-ru-vkontakte.patch
 Patch10:	clementine-1.2.0-l10n-ru-desktop.patch
 Patch11:	clementine-1.2.0-l10n-ru-search.patch
-Patch12:	clementine-1.2.2-gcc47.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -107,6 +112,7 @@ Features:
 %{_bindir}/clementine-tagreader
 %{_datadir}/kde4/services/clementine-*.protocol
 %{_datadir}/applications/clementine.desktop
+%{_datadir}/appdata/clementine.appdata.xml
 %{_iconsdir}/hicolor/64x64/apps/application-x-clementine.png
 %{_iconsdir}/hicolor/scalable/apps/application-x-clementine.svg
 %if %{with plf}
@@ -116,10 +122,10 @@ Features:
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-%{version}
-%patch0 -p1 -b .mygpo~
-%patch1 -p1 -b .ma~
-%patch2 -p1 -b .coversize~
+%setup -q -n %{oname}-%{git}
+#patch0 -p1 -b .mygpo~
+#patch1 -p1 -b .ma~
+#patch2 -p1 -b .coversize~
 
 %if %{with vkontakte}
 tar -xf %{SOURCE2}
@@ -128,12 +134,13 @@ tar -xf %{SOURCE2}
 %patch5 -p1 -b .vkontakte~
 %endif
 
-%patch10 -p1 -b .l10n~
-%patch11 -p1 -b .l10n~
+#patch10 -p1 -b .l10n~
+#patch11 -p1 -b .l10n~
 
-%patch12 -p1 -b .gcc47~
 
 %build
+export CC=gcc
+export CXX=g++
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF
