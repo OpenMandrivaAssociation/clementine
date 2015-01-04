@@ -55,7 +55,6 @@ BuildRequires:	qt4-devel >= 4.5.0
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
-BuildRequires:	pkgconfig(gstreamer-cdda-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi})
 BuildRequires:	pkgconfig(libavcodec)
