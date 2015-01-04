@@ -141,9 +141,12 @@ tar -xf %{SOURCE2}
 %build
 export CC=gcc
 export CXX=g++
+%patch12 -p1 -b .gcc47~
+
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
-	-DBUILD_WERROR=OFF
+	-DBUILD_WERROR=OFF   
+    
 %make VERBOSE=1
 
 %install
