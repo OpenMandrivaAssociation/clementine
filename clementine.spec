@@ -75,7 +75,7 @@ BuildRequires:	pkgconfig(libusbmuxd)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf)
-BuildRequires:	pkgconfig(qca2)
+BuildRequires:	qca2-devel-qt4
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
 BuildRequires:	pkgconfig(vreen)
