@@ -17,7 +17,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.4git
-Release:	0.2%{?extrarelsuffix}
+Release:	1%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -82,8 +82,10 @@ BuildRequires:	pkgconfig(vreen)
 BuildRequires:	pkgconfig(vreenoauth)
 Requires:	libprojectm-data
 Requires:	qt4-database-plugin-sqlite
+Requires:	gstreamer-tools
 Requires:	gstreamer%{gstapi}-flac
 Requires:	gstreamer%{gstapi}-plugins-ugly
+Requires:	gstreamer%{gstapi}-plugins-bad
 Suggests:	gstreamer%{gstapi}-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
 # which is need at least to mount mtp devices (tested locally)
