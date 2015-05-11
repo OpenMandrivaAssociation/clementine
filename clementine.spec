@@ -11,16 +11,15 @@
 %bcond_without vkontakte
 
 %define gstapi 0.10
-%define oname Clementine
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.2.2
-Release:	3%{?extrarelsuffix}
+Version:	1.2.3
+Release:	1%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
-Source0:	http://clementine-player.googlecode.com/files/%{oname}-%{version}.tar.gz
+Source0:	https://github.com/clementine-player/Clementine/releases/download/%{version}/clementine-%{version}.tar.gz
 Source1:	Clementine.conf
 %if %{with vkontakte}
 Source2:	clementine-1.2.0-vk-files.tar.bz2
@@ -53,8 +52,6 @@ BuildRequires:	pkgconfig(gstreamer-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-cdda-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
 BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi})
-BuildRequires:	pkgconfig(libavcodec) = 56.13.100
-BuildRequires:	pkgconfig(libavutil) = 54.15.100
 BuildRequires:	pkgconfig(libcdio)
 BuildRequires:	pkgconfig(libchromaprint)
 BuildRequires:	pkgconfig(libechonest)
@@ -116,7 +113,7 @@ Features:
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-%{version}
+%setup -q
 %patch0 -p1 -b .mygpo~
 %patch1 -p1 -b .ma~
 %patch2 -p1 -b .coversize~
