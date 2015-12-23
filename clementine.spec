@@ -17,7 +17,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.2.4git
-Release:	1%{?extrarelsuffix}
+Release:	2%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -140,7 +140,6 @@ tar -xf %{SOURCE2}
 %build
 export CC=gcc
 export CXX=g++
-%patch12 -p1 -b .gcc47~
 
 %cmake_qt4 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
