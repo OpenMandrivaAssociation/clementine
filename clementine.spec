@@ -41,6 +41,7 @@ BuildRequires:	qt4-linguist
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
 BuildRequires:	qt4-devel >= 4.5.0
+BuildRequires:	pkgconfig(cryptopp)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
@@ -101,8 +102,7 @@ Features:
 %{_datadir}/kde4/services/clementine-*.protocol
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/appdata/clementine.appdata.xml
-%{_iconsdir}/hicolor/64x64/apps/application-x-clementine.png
-%{_iconsdir}/hicolor/scalable/apps/application-x-clementine.svg
+%{_iconsdir}/hicolor/*/apps/clementine.*
 %if %{with plf}
 %{_bindir}/clementine-spotifyblob
 %endif
