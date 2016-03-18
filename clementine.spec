@@ -8,29 +8,26 @@
 %define extrarelsuffix plf
 %endif
 
-%bcond_with vkontakte
-
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 2cc560ff1e939a1c5f4b08c9504e26b9e23ca242
+%define git %{nil}
+%define pre rc1
+
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.2.4git
-Release:	4%{?extrarelsuffix}
+Version:	1.3.0
+Release:	0.rc1.1%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
 %if "%git"
 Source0:	http://github.com/clementine-player/Clementine/archive/%{oname}-%{git}.tar.gz
 %else
-Source0:	http://github.com/clementine-player/%{oname}/archive/%{oname}-%{version}.tar.gz
+Source0:	http://github.com/clementine-player/%{oname}/releases/download/%{version}%{pre}/%{name}-%{version}%{pre}.tar.xz
 %endif
 
 Source1:	Clementine.conf
-%if %{with vkontakte}
-Source2:	clementine-1.2.0-vk-files.tar.bz2
-%endif
 Patch0:		clementine-1.2.0-libmygpo-qt.patch
 # Search albums at metal-archives.com (Encyclopaedia Metallum) from:
 # - Now Playing widget (album art context menu) - current album
@@ -38,14 +35,6 @@ Patch0:		clementine-1.2.0-libmygpo-qt.patch
 Patch1:		clementine-1.2.2-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 Patch2:		clementine-1.0.0-coversize.patch
-# VKontakte (vk.com) support from http://code.google.com/r/shedwardx-clementine-experiments/
-# With some ROSA adjustments (use system vreen library etc)
-Patch3:		clementine-1.2.2-vkontakte-advanced.patch
-Patch4:		clementine-1.2.0-vkontakte-tags.patch
-# Localization issues
-Patch5:		clementine-1.2.0-l10n-ru-vkontakte.patch
-Patch10:	clementine-1.2.0-l10n-ru-desktop.patch
-Patch11:	clementine-1.2.0-l10n-ru-search.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -121,21 +110,10 @@ Features:
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{oname}-%{git}
+%setup -q -n %{name}-%{version}%{pre}
 #patch0 -p1 -b .mygpo~
 #patch1 -p1 -b .ma~
 #patch2 -p1 -b .coversize~
-
-%if %{with vkontakte}
-tar -xf %{SOURCE2}
-%patch3 -p1 -b .vkontakte~
-%patch4 -p1 -b .vkontakte~
-%patch5 -p1 -b .vkontakte~
-%endif
-
-#patch10 -p1 -b .l10n~
-#patch11 -p1 -b .l10n~
-
 
 %build
 export CC=gcc
