@@ -12,19 +12,19 @@
 %define oname Clementine
 
 %define git %{nil}
-%define pre rc1
+%define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.3.0
-Release:	0.rc1.1%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}1%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
 %if "%git"
 Source0:	http://github.com/clementine-player/Clementine/archive/%{oname}-%{git}.tar.gz
 %else
-Source0:	http://github.com/clementine-player/%{oname}/releases/download/%{version}%{pre}/%{name}-%{version}%{pre}.tar.xz
+Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 %endif
 
 Source1:	Clementine.conf
@@ -110,7 +110,7 @@ Features:
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n %{name}-%{version}%{pre}
+%setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 #patch0 -p1 -b .mygpo~
 #patch1 -p1 -b .ma~
 #patch2 -p1 -b .coversize~
