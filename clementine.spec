@@ -28,13 +28,14 @@ Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} 
 %endif
 
 Source1:	Clementine.conf
-Patch0:		clementine-1.2.0-libmygpo-qt.patch
+#Patch0:		clementine-1.2.0-libmygpo-qt.patch
 # Search albums at metal-archives.com (Encyclopaedia Metallum) from:
 # - Now Playing widget (album art context menu) - current album
 # - Playlist (selected songs context menu) - unique selected albums
-Patch1:		clementine-1.2.2-metalarchives.patch
+#Patch1:		clementine-1.2.2-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
-Patch2:		clementine-1.0.0-coversize.patch
+#Patch2:		clementine-1.0.0-coversize.patch
+Patch3:		clementine-1.3.1-libprojectm.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
@@ -111,9 +112,7 @@ Features:
 
 %prep
 %setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
-#patch0 -p1 -b .mygpo~
-#patch1 -p1 -b .ma~
-#patch2 -p1 -b .coversize~
+%apply_patches
 
 %build
 export CC=gcc
