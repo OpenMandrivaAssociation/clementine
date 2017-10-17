@@ -17,7 +17,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.3.1
-Release:	%{?{pre}:0.%{pre}.}3%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -64,7 +64,7 @@ BuildRequires:	pkgconfig(libspotify)
 BuildRequires:	pkgconfig(libusbmuxd)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
-BuildRequires:	pkgconfig(protobuf)
+BuildRequires:	pkgconfig(protobuf) >= 3.3.2
 BuildRequires:	qca2-devel-qt4
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
