@@ -17,7 +17,7 @@
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
 Version:	1.3.1
-Release:	%{?{pre}:0.%{pre}.}2%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}3%{?extrarelsuffix}
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
