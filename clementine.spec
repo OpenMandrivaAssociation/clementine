@@ -36,6 +36,7 @@ Source1:	Clementine.conf
 # Covers should always fit the screen resolution so we scale them if needed
 #Patch2:		clementine-1.0.0-coversize.patch
 Patch3:		clementine-1.3.1-libprojectm.patch
+Patch4:		clementine-1.3.1-gcc7.patch
 
 BuildRequires:	cmake
 BuildRequires:	qt4-linguist
