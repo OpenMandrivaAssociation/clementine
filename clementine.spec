@@ -78,6 +78,7 @@ BuildRequires:	cmake(Qt5OpenGL)
 BuildRequires:	cmake(Qt5Sql)
 BuildRequires:	cmake(Qt5Widgets)
 BuildRequires:	cmake(Qt5Xml)
+BuildRequires:	cmake(Qt5Test)
 Requires:	libprojectm-data
 Requires:	%{_lib}qt5sql5-sqlite
 Requires:	gstreamer-tools
