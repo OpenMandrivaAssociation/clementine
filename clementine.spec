@@ -11,20 +11,21 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git %{nil}
+%define git 20171103
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.3.1
-Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
+Version:	1.4.0
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
 %if "%git"
-Source0:	http://github.com/clementine-player/Clementine/archive/%{oname}-%{git}.tar.gz
+Source0:	%{name}-%{git}.tar.xz
+Release:	0.%{git}.1
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
+Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
@@ -36,13 +37,11 @@ Source1:	Clementine.conf
 # Covers should always fit the screen resolution so we scale them if needed
 #Patch2:		clementine-1.0.0-coversize.patch
 Patch3:		clementine-1.3.1-libprojectm.patch
-Patch4:		clementine-1.3.1-gcc7.patch
+#Patch4:		clementine-1.3.1-gcc7.patch
 
 BuildRequires:	cmake
-BuildRequires:	qt4-linguist
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
-BuildRequires:	qt4-devel >= 4.5.0
 BuildRequires:	pkgconfig(cryptopp)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
@@ -65,13 +64,20 @@ BuildRequires:	pkgconfig(libusbmuxd)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf) >= 3.3.2
-BuildRequires:	qca2-devel-qt4
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
 BuildRequires:	pkgconfig(vreen)
 BuildRequires:	pkgconfig(vreenoauth)
+BuildRequires:	cmake(Qt5Concurrent)
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5DBus)
+BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Network)
+BuildRequires:	cmake(Qt5OpenGL)
+BuildRequires:	cmake(Qt5Sql)
+BuildRequires:	cmake(Qt5Widgets)
 Requires:	libprojectm-data
-Requires:	qt4-database-plugin-sqlite
+Requires:	%{_lib}qt5sql5-sqlite
 Requires:	gstreamer-tools
 Requires:	gstreamer%{gstapi}-flac
 Requires:	gstreamer%{gstapi}-plugins-ugly
@@ -101,7 +107,7 @@ Features:
 %config %{_sysconfdir}/Clementine/Clementine.conf
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
-%{_datadir}/kde4/services/clementine-*.protocol
+%{_datadir}/kservices5/clementine-*.protocol
 %{_datadir}/applications/clementine.desktop
 %{_datadir}/appdata/clementine.appdata.xml
 %{_iconsdir}/hicolor/*/apps/clementine.*
@@ -112,7 +118,11 @@ Features:
 #----------------------------------------------------------------------------
 
 %prep
+%if "%{git}"
+%setup -qn %{name}
+%else
 %setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
+%endif
 %apply_patches
 
 %build
