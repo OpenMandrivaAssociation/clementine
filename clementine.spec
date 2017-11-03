@@ -39,6 +39,7 @@ Source1:	Clementine.conf
 Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
 
+BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
@@ -90,7 +91,7 @@ Suggests:	gvfs-iphone
 %description
 Clementine is a modern music player and library organiser. Clementine is
 a port of Amarok 1.4, with some features rewritten to take advantage of
-Qt4.
+Qt5.
 Features:
     * Search and play your local music library
     * Listen to internet radio from Last.fm, SomaFM and Magnatune
@@ -126,10 +127,7 @@ Features:
 %apply_patches
 
 %build
-export CC=gcc
-export CXX=g++
-
-%cmake_qt4 \
+%cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF   
     
