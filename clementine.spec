@@ -68,7 +68,7 @@ BuildRequires:	pkgconfig(protobuf) >= 3.3.2
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
 #BuildRequires:	pkgconfig(vreen)
-BuildRequires:	pkgconfig(vreenoauth)
+#BuildRequires:	pkgconfig(vreenoauth)
 BuildRequires:	cmake(Qt5Concurrent)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5DBus)
