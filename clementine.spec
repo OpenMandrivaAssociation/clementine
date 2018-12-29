@@ -130,7 +130,7 @@ Features:
 
 %prep
 %if "%{git}"
-%setup -qn %{name}
+%setup -qn %{name}-%{git}
 %else
 %setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
