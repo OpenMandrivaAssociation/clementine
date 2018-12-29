@@ -38,6 +38,7 @@ Source1:	Clementine.conf
 #Patch2:		clementine-1.0.0-coversize.patch
 Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
+Patch5:		clementine-qt5-fix-build-remove-QT5-MacExtras.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
@@ -134,7 +135,8 @@ Features:
 %else
 %setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
-%apply_patches
+%patch3 -p1
+%patch5 -p0
 
 %build
 %cmake_qt5 \
