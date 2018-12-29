@@ -11,12 +11,12 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20171103
+%define git 20181229
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.4.0
+Version:	1.3.2
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -38,6 +38,7 @@ Source1:	Clementine.conf
 #Patch2:		clementine-1.0.0-coversize.patch
 Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
+Patch5:		clementine-qt5-fix-build-remove-QT5-MacExtras.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
@@ -120,7 +121,7 @@ Features:
 %{_bindir}/clementine-tagreader
 %{_datadir}/kservices5/clementine-*.protocol
 %{_datadir}/applications/clementine.desktop
-%{_datadir}/appdata/clementine.appdata.xml
+%{_datadir}/metainfo/clementine.appdata.xml
 %{_iconsdir}/hicolor/*/apps/clementine.*
 %if %{with plf}
 %{_bindir}/clementine-spotifyblob
@@ -130,11 +131,12 @@ Features:
 
 %prep
 %if "%{git}"
-%setup -qn %{name}
+%setup -qn %{name}-%{git}
 %else
 %setup -q -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
-%apply_patches
+%patch3 -p1
+%patch5 -p0
 
 %build
 %cmake_qt5 \
