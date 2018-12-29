@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20171103
+%define git 20181229
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
