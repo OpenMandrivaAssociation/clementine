@@ -82,6 +82,11 @@ BuildRequires:	cmake(Qt5Test)
 BuildRequires:	cmake(Qt5X11Extras)
 BuildRequires:	cmake(Qt5WebKitWidgets)
 BuildRequires:	cmake(Qt5LinguistTools)
+BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(sqlite3)
+
+
 Requires:	libprojectm-data
 Requires:	%{_lib}qt5sql5-sqlite
 Requires:	gstreamer-tools
