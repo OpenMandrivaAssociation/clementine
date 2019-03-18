@@ -22,7 +22,7 @@ Group:		Sound
 Url:		http://www.clementine-player.org/
 %if "%git"
 Source0:	%{name}-%{git}.tar.xz
-Release:	0.%{git}.1
+Release:	0.%{git}.2
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
