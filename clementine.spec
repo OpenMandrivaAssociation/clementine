@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20190516
+%define git 20190713
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
@@ -141,10 +141,10 @@ Features:
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF   
     
-%make VERBOSE=1
+%make_build VERBOSE=1
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
 
