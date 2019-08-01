@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20190516
+%define git 20190713
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
@@ -23,7 +23,7 @@ Url:		http://www.clementine-player.org/
 %if "%git"
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
-Release:	0.%{git}.1
+Release:	0.%{git}.2
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
@@ -98,6 +98,8 @@ Suggests:	gstreamer%{gstapi}-decoders-audio
 # Needed to be able to mount ipod/iphone/ipad (not tested locally) but it's also pulling gvfs
 # which is need at least to mount mtp devices (tested locally)
 Suggests:	gvfs-iphone
+# Need for listen music from some online sources like Google Drive or SoundCloud (bug 2133)
+Recommends:	glib-networking
 
 %description
 Clementine is a modern music player and library organiser. Clementine is
@@ -141,10 +143,10 @@ Features:
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF   
     
-%make VERBOSE=1
+%make_build VERBOSE=1
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.conf
 
