@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20190713
+%define git 20190809
 %define pre %{nil}
 
 Summary:	A cross-platform music player based on Amarok 1.4
@@ -23,7 +23,7 @@ Url:		http://www.clementine-player.org/
 %if "%git"
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
-Release:	0.%{git}.2
+Release:	0.%{git}.1
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
@@ -39,6 +39,10 @@ Source1:	Clementine.conf
 #Patch2:		clementine-1.0.0-coversize.patch
 Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
+
+# Patches that are in "master" (qt4) branch but not yet in qt5 branch
+Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
+Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
