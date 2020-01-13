@@ -11,12 +11,14 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define git 20190809
+%define candidate rc1
+%define git %{nil}
 %define pre %{nil}
+
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.3.2
+Version:	1.4.0
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.clementine-player.org/
@@ -24,9 +26,13 @@ Url:		http://www.clementine-player.org/
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
 Release:	0.%{git}.1
+%endif
+%if "%candidate"
+Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
+Release:	0.%{candidate}
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
@@ -37,12 +43,12 @@ Source1:	Clementine.conf
 #Patch1:		clementine-1.2.2-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 #Patch2:		clementine-1.0.0-coversize.patch
-Patch3:		clementine-1.3.1-libprojectm.patch
+#Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
 
 # Patches that are in "master" (qt4) branch but not yet in qt5 branch
-Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
-Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
+#Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
+#Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
@@ -138,6 +144,9 @@ Features:
 %prep
 %if "%{git}"
 %autosetup -p1 -n %{name}-%{git}
+%endif
+%if "%{candidate}"
+%autosetup -p1 -n %{oname}-%{version}%{candidate}
 %else
 %autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
