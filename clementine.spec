@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define rc rc1
+%define candidate rc1
 %define git %{nil}
 %define pre %{nil}
 
@@ -29,7 +29,7 @@ Release:	0.%{git}.1
 %endif
 %if "%rc"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{rc}/%{oname}-{version}%{rc}.tar.gz
-Release:	0.%{rc}
+Release:	0.%{candidate}
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
@@ -145,7 +145,7 @@ Features:
 %if "%{git}"
 %autosetup -p1 -n %{name}-%{git}
 %endif
-%if "%{rc}"
+%if "%{candidate}"
 %autosetup -p1 -n %{oname}-%{version}%{rc}
 %else
 %autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
