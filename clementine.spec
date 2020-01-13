@@ -11,9 +11,10 @@
 %define gstapi 1.0
 %define oname Clementine
 
+%define rc rc1
 %define git %{nil}
 %define pre %{nil}
-%define rc rc1
+
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
