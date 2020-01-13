@@ -146,7 +146,7 @@ Features:
 %autosetup -p1 -n %{name}-%{git}
 %endif
 %if "%{candidate}"
-%autosetup -p1 -n %{oname}-%{version}%{rc}
+%autosetup -p1 -n %{oname}-%{version}%{candidate}
 %else
 %autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
