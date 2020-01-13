@@ -47,8 +47,8 @@ Source1:	Clementine.conf
 #Patch4:		clementine-1.3.1-gcc7.patch
 
 # Patches that are in "master" (qt4) branch but not yet in qt5 branch
-Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
-Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
+#Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
+#Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
