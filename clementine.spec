@@ -27,8 +27,8 @@ Url:		http://www.clementine-player.org/
 Source0:	%{name}-%{git}.tar.xz
 Release:	0.%{git}.1
 %endif
-%if "%rc"
-Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{rc}/%{oname}-{version}%{rc}.tar.gz
+%if "%candidate"
+Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-{version}%{candidate}.tar.gz
 Release:	0.%{candidate}
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
