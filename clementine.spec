@@ -43,7 +43,7 @@ Source1:	Clementine.conf
 #Patch1:		clementine-1.2.2-metalarchives.patch
 # Covers should always fit the screen resolution so we scale them if needed
 #Patch2:		clementine-1.0.0-coversize.patch
-Patch3:		clementine-1.3.1-libprojectm.patch
+#Patch3:		clementine-1.3.1-libprojectm.patch
 #Patch4:		clementine-1.3.1-gcc7.patch
 
 # Patches that are in "master" (qt4) branch but not yet in qt5 branch
