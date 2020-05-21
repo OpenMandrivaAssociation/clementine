@@ -1,0 +1,33 @@
+diff -uraN Clementine-1.4.0rc1/src/widgets/freespacebar.cpp omv-Clementine-1.4.0rc1/src/widgets/freespacebar.cpp
+--- Clementine-1.4.0rc1/src/widgets/freespacebar.cpp	2020-05-20 22:33:47.000000000 +0200
++++ omv-Clementine-1.4.0rc1/src/widgets/freespacebar.cpp	2020-05-21 17:08:59.783492613 +0200
+@@ -20,6 +20,7 @@
+ 
+ #include <QLinearGradient>
+ #include <QPainter>
++#include <QPainterPath>
+ 
+ const int FreeSpaceBar::kBarHeight = 20;
+ const int FreeSpaceBar::kBarBorderRadius = 8;
+diff -uraN Clementine-1.4.0rc1/src/widgets/osdpretty.cpp omv-Clementine-1.4.0rc1/src/widgets/osdpretty.cpp
+--- Clementine-1.4.0rc1/src/widgets/osdpretty.cpp	2020-05-20 22:33:47.000000000 +0200
++++ omv-Clementine-1.4.0rc1/src/widgets/osdpretty.cpp	2020-05-21 17:10:19.103809385 +0200
+@@ -27,6 +27,7 @@
+ #include <QLayout>
+ #include <QMouseEvent>
+ #include <QPainter>
++#include <QPainterPath>
+ #include <QScreen>
+ #include <QSettings>
+ #include <QTimeLine>
+diff -uraN Clementine-1.4.0rc1/src/widgets/sliderwidget.cpp omv-Clementine-1.4.0rc1/src/widgets/sliderwidget.cpp
+--- Clementine-1.4.0rc1/src/widgets/sliderwidget.cpp	2020-05-20 22:33:47.000000000 +0200
++++ omv-Clementine-1.4.0rc1/src/widgets/sliderwidget.cpp	2020-05-21 17:10:47.247794458 +0200
+@@ -24,6 +24,7 @@
+ #include <QBrush>
+ #include <QImage>
+ #include <QPainter>
++#include <QPainterPath>
+ #include <QSize>
+ #include <QTimer>
+ #include <QStyle>
