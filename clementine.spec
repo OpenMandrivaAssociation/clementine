@@ -36,19 +36,8 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
-#Patch0:		clementine-1.2.0-libmygpo-qt.patch
-# Search albums at metal-archives.com (Encyclopaedia Metallum) from:
-# - Now Playing widget (album art context menu) - current album
-# - Playlist (selected songs context menu) - unique selected albums
-#Patch1:		clementine-1.2.2-metalarchives.patch
-# Covers should always fit the screen resolution so we scale them if needed
-#Patch2:		clementine-1.0.0-coversize.patch
-#Patch3:		clementine-1.3.1-libprojectm.patch
-#Patch4:		clementine-1.3.1-gcc7.patch
 
-# Patches that are in "master" (qt4) branch but not yet in qt5 branch
-#Patch10:	https://github.com/clementine-player/Clementine/commit/ec2e8be4d6b027221b1bc64a4a960aeb1cdd38bf.patch
-#Patch11:	https://github.com/clementine-player/Clementine/commit/546078c317fdbe27a3c99b5c110a4b3310d96d54.patch
+Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
