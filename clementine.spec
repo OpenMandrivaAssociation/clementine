@@ -37,7 +37,7 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 
 Source1:	Clementine.conf
 
-Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
+#Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
@@ -55,7 +55,7 @@ BuildRequires:	pkgconfig(libchromaprint)
 BuildRequires:	pkgconfig(libgpod-1.0)
 BuildRequires:	pkgconfig(libmtp)
 #BuildRequires:	pkgconfig(libmygpo-qt)
-BuildRequires:	pkgconfig(libplist)
+BuildRequires:	pkgconfig(libplist-2.0)
 # For Google Drive integration
 BuildRequires:	pkgconfig(libsparsehash)
 %if %{with plf}
