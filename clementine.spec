@@ -29,7 +29,7 @@ Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
-Release:	0.%{candidate}.2
+Release:	0.%{candidate}.3
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
@@ -37,7 +37,7 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 
 Source1:	Clementine.conf
 
-Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
+#Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
@@ -55,13 +55,13 @@ BuildRequires:	pkgconfig(libchromaprint)
 BuildRequires:	pkgconfig(libgpod-1.0)
 BuildRequires:	pkgconfig(libmtp)
 #BuildRequires:	pkgconfig(libmygpo-qt)
-BuildRequires:	pkgconfig(libplist)
+BuildRequires:	pkgconfig(libplist-2.0)
 # For Google Drive integration
 BuildRequires:	pkgconfig(libsparsehash)
 %if %{with plf}
 BuildRequires:	pkgconfig(libspotify)
 %endif
-BuildRequires:	pkgconfig(libusbmuxd)
+BuildRequires:	pkgconfig(libusbmuxd-2.0)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf) >= 3.3.2
