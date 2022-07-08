@@ -140,6 +140,7 @@ Features:
 %autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
 
+sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
 %build
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
