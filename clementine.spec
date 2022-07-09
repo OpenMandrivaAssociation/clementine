@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define candidate rc1
+%define candidate rc2
 %define git %{nil}
 %define pre %{nil}
 
@@ -25,11 +25,11 @@ Url:		http://www.clementine-player.org/
 %if "%git"
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
-Release:	0.%{git}.2
+Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
-Release:	0.%{candidate}.4
+Release:	0.%{candidate}.1
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
@@ -43,7 +43,9 @@ BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
+BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cryptopp)
+BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
@@ -121,9 +123,9 @@ Features:
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
 %{_datadir}/kservices5/clementine-*.protocol
-%{_datadir}/applications/clementine.desktop
-%{_datadir}/metainfo/clementine.appdata.xml
-%{_iconsdir}/hicolor/*/apps/clementine.*
+%{_datadir}/applications/org.clementine_player.Clementine.desktop
+%{_datadir}/metainfo/org.clementine_player.Clementine.appdata.xml
+%{_iconsdir}/hicolor/*/apps/org.clementine_player.Clementine.*
 %if %{with plf}
 %{_bindir}/clementine-spotifyblob
 %endif
@@ -140,7 +142,13 @@ Features:
 %autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
 
+sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
 %build
+# Clang 14.0.5 and Clementine 1.4.0rc2 failed due to: /builddir/build/BUILD/Clementine-1.4.0rc2/src/internet/spotifywebapi/spotifywebapiservice.cpp:44:44: 
+# error: implicit instantiation of undefined template 'std::array<const char *, 1>'
+# td::array<const char*, sizeof...(Args)> names = { 
+export CC=gcc
+export CXX=g++
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF   
