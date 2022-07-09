@@ -121,9 +121,9 @@ Features:
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
 %{_datadir}/kservices5/clementine-*.protocol
-%{_datadir}/applications/clementine.desktop
-%{_datadir}/metainfo/clementine.appdata.xml
-%{_iconsdir}/hicolor/*/apps/clementine.*
+#{_datadir}/applications/clementine.desktop
+#{_datadir}/metainfo/clementine.appdata.xml
+#{_iconsdir}/hicolor/*/apps/clementine.*
 %if %{with plf}
 %{_bindir}/clementine-spotifyblob
 %endif
