@@ -43,7 +43,9 @@ BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
 BuildRequires:	liblastfm-devel
+BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cryptopp)
+BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gstreamer-%{gstapi})
@@ -142,6 +144,9 @@ Features:
 
 sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
 %build
+# Clang 14.0.5 and Clementine 1.4.0rc2 failed due to: /builddir/build/BUILD/Clementine-1.4.0rc2/src/internet/spotifywebapi/spotifywebapiservice.cpp:44:44: 
+# error: implicit instantiation of undefined template 'std::array<const char *, 1>'
+# td::array<const char*, sizeof...(Args)> names = { 
 export CC=gcc
 export CXX=g++
 %cmake_qt5 \
