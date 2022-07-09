@@ -142,6 +142,8 @@ Features:
 
 sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
 %build
+export CC=gcc
+export CXX=g++
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
 	-DBUILD_WERROR=OFF   
