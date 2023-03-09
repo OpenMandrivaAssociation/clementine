@@ -69,6 +69,7 @@ BuildRequires:	pkgconfig(libusbmuxd-2.0)
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
 BuildRequires:	pkgconfig(protobuf) >= 3.3.2
+BuildRequires:	cmake(absl)
 BuildRequires:	pkgconfig(QJson)
 BuildRequires:	pkgconfig(taglib) >= 1.6
 #BuildRequires:	pkgconfig(vreen)
