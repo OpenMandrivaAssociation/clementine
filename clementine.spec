@@ -15,6 +15,7 @@
 %define git %{nil}
 %define pre %{nil}
 
+%global optflags %{optflags} -DPROTOBUF_USE_DLLS
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
@@ -29,7 +30,7 @@ Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
-Release:	0.%{candidate}.2
+Release:	0.%{candidate}.3
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
@@ -37,6 +38,7 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 
 Source1:	Clementine.conf
 
+Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
 #Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
 
 BuildRequires:	qmake5
