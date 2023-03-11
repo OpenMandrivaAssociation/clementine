@@ -30,7 +30,7 @@ Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
-Release:	0.%{candidate}.3
+Release:	0.%{candidate}.4
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
