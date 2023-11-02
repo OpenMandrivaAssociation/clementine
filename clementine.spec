@@ -30,7 +30,7 @@ Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
-Release:	0.%{candidate}.8
+Release:	0.%{candidate}.9
 %else
 Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
@@ -39,7 +39,7 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 Source1:	Clementine.conf
 
 Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
-#Patch1:		Clementine-1.4.0rc1-fix-missing-include-fix-for-qt5.15-openmandriva.patch
+Patch1:		clementine-sqlite-no-deprecated.patch
 
 BuildRequires:	qmake5
 BuildRequires:	cmake
