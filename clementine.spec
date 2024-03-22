@@ -90,7 +90,7 @@ BuildRequires:	cmake(Qt5LinguistTools)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(sqlite3)
-
+BuildRequires:	gettext
 
 Requires:	libprojectm-data
 Requires:	%{_lib}qt5sql5-sqlite
