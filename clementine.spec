@@ -22,7 +22,7 @@ Name:		clementine
 Version:	1.4.0
 License:	GPLv3+
 Group:		Sound
-Url:		http://www.clementine-player.org/
+Url:		https://www.clementine-player.org/
 %if "%git"
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
