@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-#define candidate rc2
+%define candidate %{nil}
 %define git %{nil}
 %define pre %{nil}
 
