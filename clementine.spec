@@ -39,7 +39,7 @@ Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 
 Source1:	Clementine.conf
 
-Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
+#Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
 Patch1:		clementine-sqlite-no-deprecated.patch
 
 BuildRequires:	qmake5
