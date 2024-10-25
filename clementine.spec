@@ -42,7 +42,6 @@ Source1:	Clementine.conf
 #Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
 Patch1:		clementine-sqlite-no-deprecated.patch
 
-BuildRequires:	git
 BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
