@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define candidate rc2
+#define candidate rc2
 %define git %{nil}
 %define pre %{nil}
 
@@ -19,7 +19,7 @@
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.4.0
+Version:	1.4.1~11
 License:	GPLv3+
 Group:		Sound
 Url:		https://www.clementine-player.org/
@@ -32,7 +32,8 @@ Release:	0.%{git}.1
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
 Release:	0.%{candidate}.10
 %else
-Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
+Source0:	https://github.com/clementine-player/Clementine/archive/1.4.1-11-gcecc1c1b5.tar.gz
+#Source0:	https://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 %endif
 
@@ -142,7 +143,8 @@ Features:
 %if "%{candidate}"
 %autosetup -p1 -n %{oname}-%{version}%{candidate}
 %else
-%autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
+%autosetup -p1 -n %{oname}-1.4.1-11-gcecc1c1b5
+#autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
 
 sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
