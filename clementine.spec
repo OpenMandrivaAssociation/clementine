@@ -44,7 +44,7 @@ Patch1:		clementine-sqlite-no-deprecated.patch
 
 # Upstream merged or not yet
 #Patch2:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7342.patch
-Patch3:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7356.patch
+#Patch3:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7356.patch
 
 # from OpenMamba
 Patch4:		https://src.openmamba.org/rpms/clementine/src/commit/19407827d87265adc35a3d2c565fc83c4e836cf6/clementine-1.4.1-cmake-fix-version.patch
