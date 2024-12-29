@@ -44,7 +44,7 @@ Patch1:		clementine-sqlite-no-deprecated.patch
 Patch2:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7342.patch
 Patch3:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7356.patch
 
-BuildRequires:	git
+#BuildRequires:	git
 BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
