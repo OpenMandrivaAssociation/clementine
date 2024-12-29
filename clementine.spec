@@ -163,6 +163,7 @@ sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_n
 # td::array<const char*, sizeof...(Args)> names = { 
 export CC=gcc
 export CXX=g++
+%global ldflags %{ldflags} -lprotobuf -labsl_log_internal_check_op -labsl_log_internal_message
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
  	-DFORCE_GIT_REVISION=%{version} \
