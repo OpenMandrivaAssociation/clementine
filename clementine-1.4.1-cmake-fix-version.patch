@@ -1,0 +1,13 @@
+--- Clementine-1.4.1/cmake/Version.cmake.orig	2024-10-15 09:57:42.930405035 +0200
++++ Clementine-1.4.1/cmake/Version.cmake	2024-10-15 09:57:56.698436681 +0200
+@@ -3,8 +3,8 @@
+ # Version numbers.
+ set(CLEMENTINE_VERSION_MAJOR 1)
+ set(CLEMENTINE_VERSION_MINOR 4)
+-set(CLEMENTINE_VERSION_PATCH 0)
+-set(CLEMENTINE_VERSION_PRERELEASE rc2)
++set(CLEMENTINE_VERSION_PATCH 1)
++set(CLEMENTINE_VERSION_PRERELEASE 0)
+ 
+ # This should be set to OFF in a release branch
+ set(INCLUDE_GIT_REVISION ON)

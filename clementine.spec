@@ -11,7 +11,7 @@
 %define gstapi 1.0
 %define oname Clementine
 
-%define candidate rc2
+%define candidate %{nil}
 %define git %{nil}
 %define pre %{nil}
 
@@ -19,7 +19,7 @@
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.4.0
+Version:	1.4.1
 License:	GPLv3+
 Group:		Sound
 Url:		https://www.clementine-player.org/
@@ -32,15 +32,25 @@ Release:	0.%{git}.1
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
 Release:	0.%{candidate}.10
 %else
-Source0:	http://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
+Source0:	https://github.com/clementine-player/Clementine/archive/1.4.1-11-gcecc1c1b5/Clementine-1.4.1-11-gcecc1c1b5.tar.gz
+#Source0:	https://github.com/clementine-player/%{oname}/archive/%(echo %{version} |sed -e 's,.0$,,').tar.gz
 Release:	%{?{pre}:0.%{pre}.}0rc1%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
 
-Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
+#Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
 Patch1:		clementine-sqlite-no-deprecated.patch
 
+# Upstream merged or not yet
+#Patch2:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7342.patch
+#Patch3:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7356.patch
+Patch3:			https://github.com/clementine-player/Clementine/pull/7314.patch
+
+# from OpenMamba
+Patch4:		https://src.openmamba.org/rpms/clementine/src/commit/19407827d87265adc35a3d2c565fc83c4e836cf6/clementine-1.4.1-cmake-fix-version.patch
+
+#BuildRequires:	git
 BuildRequires:	qmake5
 BuildRequires:	cmake
 BuildRequires:	boost-devel
@@ -71,7 +81,7 @@ BuildRequires:	pkgconfig(libusbmuxd-2.0)
 BuildRequires:	pkgconfig(protobuf) >= 3.3.2
 BuildRequires:	cmake(absl)
 BuildRequires:	pkgconfig(QJson)
-BuildRequires:	pkgconfig(taglib) >= 1.6
+BuildRequires:	pkgconfig(taglib) >= 2.0
 #BuildRequires:	pkgconfig(vreen)
 #BuildRequires:	pkgconfig(vreenoauth)
 BuildRequires:	cmake(Qt5Concurrent)
@@ -142,7 +152,8 @@ Features:
 %if "%{candidate}"
 %autosetup -p1 -n %{oname}-%{version}%{candidate}
 %else
-%autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
+%autosetup -p1 -n Clementine-1.4.1-11-gcecc1c1b5
+#autosetup -p1 -n %{oname}-%(echo %{version} |sed -e 's,.0$,,')%{pre}
 %endif
 
 sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
@@ -152,8 +163,12 @@ sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_n
 # td::array<const char*, sizeof...(Args)> names = { 
 export CC=gcc
 export CXX=g++
+%global ldflags %{ldflags} -lprotobuf -labsl_log_internal_check_op -labsl_log_internal_message
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
+ 	-DFORCE_GIT_REVISION=%{version} \
+  	-DCMAKE_CXX_STANDARD=20 \
+   	-DCMAKE_EXE_LINKER_FLAGS="`pkgconf --libs protobuf`" \
 	-DBUILD_WERROR=OFF   
     
 %make_build VERBOSE=1
