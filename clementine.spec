@@ -168,6 +168,7 @@ export CXX=g++
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
  	-DFORCE_GIT_REVISION=%{version} \
   	-DCMAKE_CXX_STANDARD=20 \
+   	-DCMAKE_EXE_LINKER_FLAGS="`pkgconf --libs protobuf`" \
 	-DBUILD_WERROR=OFF   
     
 %make_build VERBOSE=1
