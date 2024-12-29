@@ -165,6 +165,7 @@ export CXX=g++
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
  	-DFORCE_GIT_REVISION=%{version} \
+  	-DCMAKE_CXX_STANDARD=17 \
 	-DBUILD_WERROR=OFF   
     
 %make_build VERBOSE=1
