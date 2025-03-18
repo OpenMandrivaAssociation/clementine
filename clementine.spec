@@ -39,7 +39,7 @@ Release:	%{?{pre}:0.%{pre}.}1%{?extrarelsuffix}
 
 Source1:	Clementine.conf
 
-#Patch0:		clementine-1.4.0rc2-protobuf-22.1.patch
+Patch0:		clementine-1.4.1-cmake-4.0.0.patch
 Patch1:		clementine-sqlite-no-deprecated.patch
 
 # Upstream merged or not yet
@@ -157,12 +157,8 @@ Features:
 %endif
 
 sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
+
 %build
-# Clang 14.0.5 and Clementine 1.4.0rc2 failed due to: /builddir/build/BUILD/Clementine-1.4.0rc2/src/internet/spotifywebapi/spotifywebapiservice.cpp:44:44: 
-# error: implicit instantiation of undefined template 'std::array<const char *, 1>'
-# td::array<const char*, sizeof...(Args)> names = { 
-export CC=gcc
-export CXX=g++
 %global ldflags %{ldflags} -lprotobuf -labsl_log_internal_check_op -labsl_log_internal_message
 %cmake_qt5 \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
@@ -183,4 +179,3 @@ install -m 644 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/Clementine/Clementine.co
 rm -rf %{buildroot}/builddir
 rm -rf %{buildroot}/home
 %endif
-
