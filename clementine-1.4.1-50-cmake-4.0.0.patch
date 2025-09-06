@@ -1,0 +1,30 @@
+diff -rupN Clementine-1.4.1-50-ge281c4508.old/3rdparty/libprojectm/CMakeLists.txt Clementine-1.4.1-50-ge281c4508/3rdparty/libprojectm/CMakeLists.txt
+--- Clementine-1.4.1-50-ge281c4508.old/3rdparty/libprojectm/CMakeLists.txt	2025-08-19 04:52:17.000000000 +0200
++++ Clementine-1.4.1-50-ge281c4508/3rdparty/libprojectm/CMakeLists.txt	2025-09-06 14:10:07.585710398 +0200
+@@ -4,14 +4,6 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "T
+ 
+ include(CheckCXXCompilerFlag)
+ 
+-cmake_policy(SET CMP0005 OLD)
+-
+-# This policy was only added in cmake 2.8.4
+-if (CMAKE_VERSION VERSION_GREATER "2.8.3")
+-  cmake_policy(SET CMP0017 OLD)
+-endif (CMAKE_VERSION VERSION_GREATER "2.8.3")
+-
+-
+ set(USE_DEVIL OFF)
+ set(USE_FBO ON)
+ set(USE_FTGL OFF)
+diff -rupN Clementine-1.4.1-50-ge281c4508.old/CMakeLists.txt Clementine-1.4.1-50-ge281c4508/CMakeLists.txt
+--- Clementine-1.4.1-50-ge281c4508.old/CMakeLists.txt	2025-08-19 04:52:17.000000000 +0200
++++ Clementine-1.4.1-50-ge281c4508/CMakeLists.txt	2025-09-06 14:10:21.391893391 +0200
+@@ -1,8 +1,6 @@
+ cmake_minimum_required(VERSION 3.13.0)
+ project(clementine)
+ 
+-cmake_policy(SET CMP0053 OLD)
+-
+ include(CheckCXXCompilerFlag)
+ include(FindPkgConfig)
+ include(cmake/C++11Compat.cmake)
