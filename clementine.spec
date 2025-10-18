@@ -36,7 +36,7 @@ Release:	0.%{candidate}.10
 %else
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}-%{buildnum}/%{oname}-%{version}-%{buildnum}.tar.gz
 #Source0:	https://github.com/clementine-player/%%{oname}/archive/%%(echo %%{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}2%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}3%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
