@@ -10,7 +10,7 @@
 
 %define	gstapi 1.0
 %define	oname Clementine
-%define	buildnum	58-gbae968a2f
+%define	buildnum	61-gbb2f63780
 
 %define candidate %{nil}
 %define git %{nil}
