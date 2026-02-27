@@ -55,6 +55,7 @@ Patch4:		https://src.openmamba.org/rpms/clementine/src/commit/19407827d87265adc3
 BuildRequires:	gettext
 #BuildRequires:	git
 BuildRequires:	cmake
+BuildRequires:	make
 BuildRequires:	qmake5
 BuildRequires:	cmake(absl)
 BuildRequires:	cmake(Qt5Concurrent)
