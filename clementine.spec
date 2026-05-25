@@ -10,7 +10,7 @@
 
 %define	gstapi 1.0
 %define	oname Clementine
-%define	buildnum	61-gbb2f63780
+%define	buildnum	78-gb55eca391
 
 %define candidate %{nil}
 %define git %{nil}
@@ -21,7 +21,7 @@
 
 Summary:	A cross-platform music player based on Amarok 1.4
 Name:		clementine
-Version:	1.4.1
+Version:		1.4.1
 License:	GPLv3+
 Group:	Sound
 Url:		https://www.clementine-player.org/
@@ -36,12 +36,12 @@ Release:	0.%{candidate}.10
 %else
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}-%{buildnum}/%{oname}-%{version}-%{buildnum}.tar.gz
 #Source0:	https://github.com/clementine-player/%%{oname}/archive/%%(echo %%{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}3%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
 
-Patch0:		clementine-1.4.1-50-cmake-4.0.0.patch
+#Patch0:	clementine-1.4.1-50-cmake-4.0.0.patch
 Patch1:		clementine-sqlite-no-deprecated.patch
 
 # Upstream merged or not yet
@@ -54,60 +54,60 @@ Patch4:		https://src.openmamba.org/rpms/clementine/src/commit/19407827d87265adc3
 
 BuildRequires:	gettext
 #BuildRequires:	git
-BuildRequires:	cmake
-BuildRequires:	make
-BuildRequires:	qmake5
-BuildRequires:	cmake(absl)
-BuildRequires:	cmake(Qt5Concurrent)
-BuildRequires:	cmake(Qt5Core)
-BuildRequires:	cmake(Qt5DBus)
-BuildRequires:	cmake(Qt5Gui)
-BuildRequires:	cmake(Qt5Network)
-BuildRequires:	cmake(Qt5OpenGL)
-BuildRequires:	cmake(Qt5Sql)
-BuildRequires:	cmake(Qt5Widgets)
-BuildRequires:	cmake(Qt5Xml)
-BuildRequires:	cmake(Qt5Test)
-BuildRequires:	cmake(Qt5X11Extras)
-BuildRequires:	cmake(Qt5WebKitWidgets)
-BuildRequires:	cmake(Qt5LinguistTools)
-BuildRequires:	boost-devel
-BuildRequires:	liblastfm-devel
-BuildRequires:	pkgconfig(alsa)
-BuildRequires:	pkgconfig(cryptopp)
-BuildRequires:	pkgconfig(fftw3)
-BuildRequires:	pkgconfig(glew)
-BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(glu)
-BuildRequires:	pkgconfig(gstreamer-%{gstapi})
-BuildRequires:	pkgconfig(gstreamer-plugins-base-%{gstapi})
-BuildRequires:	pkgconfig(gstreamer-tag-%{gstapi})
+BuildRequires:		cmake
+BuildRequires:		make
+BuildRequires:		qmake5
+BuildRequires:		cmake(absl)
+BuildRequires:		cmake(Qt5Concurrent)
+BuildRequires:		cmake(Qt5Core)
+BuildRequires:		cmake(Qt5DBus)
+BuildRequires:		cmake(Qt5Gui)
+BuildRequires:		cmake(Qt5Network)
+BuildRequires:		cmake(Qt5OpenGL)
+BuildRequires:		cmake(Qt5Sql)
+BuildRequires:		cmake(Qt5Widgets)
+BuildRequires:		cmake(Qt5Xml)
+BuildRequires:		cmake(Qt5Test)
+BuildRequires:		cmake(Qt5X11Extras)
+BuildRequires:		cmake(Qt5WebKitWidgets)
+BuildRequires:		cmake(Qt5LinguistTools)
+BuildRequires:		boost-devel
+BuildRequires:		liblastfm-devel
+BuildRequires:		pkgconfig(alsa)
+BuildRequires:		pkgconfig(cryptopp)
+BuildRequires:		pkgconfig(fftw3)
+BuildRequires:		pkgconfig(glew)
+BuildRequires:		pkgconfig(glib-2.0)
+BuildRequires:		pkgconfig(glu)
+BuildRequires:		pkgconfig(gstreamer-%{gstapi})
+BuildRequires:		pkgconfig(gstreamer-plugins-base-%{gstapi})
+BuildRequires:		pkgconfig(gstreamer-tag-%{gstapi})
 # Disable for now as indicate-qt seems to be broken and we don't really need it anyway
 #BuildRequires:	pkgconfig(indicate-qt)
-BuildRequires:	pkgconfig(libcdio)
-BuildRequires:	pkgconfig(libchromaprint)
+BuildRequires:		pkgconfig(libcdio)
+BuildRequires:		pkgconfig(libchromaprint)
 #BuildRequires:	pkgconfig(libechonest)
-BuildRequires:	pkgconfig(libgpod-1.0)
-BuildRequires:	pkgconfig(libmtp)
+BuildRequires:		pkgconfig(libgpod-1.0)
+BuildRequires:		pkgconfig(libmtp)
 #BuildRequires:	pkgconfig(libmygpo-qt)
-BuildRequires:	pkgconfig(libplist-2.0)
-BuildRequires:	pkgconfig(libpulse)
+BuildRequires:		pkgconfig(libplist-2.0)
+BuildRequires:		pkgconfig(libpulse)
 # For Google Drive integration
-BuildRequires:	pkgconfig(libsparsehash)
+BuildRequires:		pkgconfig(libsparsehash)
 %if %{with plf}
-BuildRequires:	pkgconfig(libspotify)
+BuildRequires:		pkgconfig(libspotify)
 %endif
-BuildRequires:	pkgconfig(libusbmuxd-2.0)
-BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:	pkgconfig(protobuf) >= 3.3.2
-BuildRequires:	pkgconfig(QJson)
-BuildRequires:	pkgconfig(sqlite3)
-BuildRequires:	pkgconfig(taglib) >= 2.0
-BuildRequires:	pkgconfig(udisks2)
+BuildRequires:		pkgconfig(libusbmuxd-2.0)
+BuildRequires:		pkgconfig(libxml-2.0)
+BuildRequires:		pkgconfig(protobuf) >= 3.3.2
+BuildRequires:		pkgconfig(QJson)
+BuildRequires:		pkgconfig(sqlite3)
+BuildRequires:		pkgconfig(taglib) >= 2.0
+BuildRequires:		pkgconfig(udisks2)
 #BuildRequires:	pkgconfig(vreen)
 #BuildRequires:	pkgconfig(vreenoauth)
-BuildRequires:	pkgconfig(x11)
-BuildRequires:	pkgconfig(zlib)
+BuildRequires:		pkgconfig(x11)
+BuildRequires:		pkgconfig(zlib)
 
 # Needed for listen music from some online sources like Google Drive or SoundCloud (bug 2133)
 Recommends:	glib-networking
