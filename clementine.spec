@@ -28,7 +28,7 @@ Url:		https://www.clementine-player.org/
 %if "%git"
 # Packaged from qt5 branch
 Source0:	%{name}-%{git}.tar.xz
-Release:	0.%{git}.2
+Release:	0.%{git}.1
 %endif
 %if "%candidate"
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}%{candidate}/%{oname}-%{version}%{candidate}.tar.gz
@@ -36,7 +36,7 @@ Release:	0.%{candidate}.10
 %else
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}-%{buildnum}/%{oname}-%{version}-%{buildnum}.tar.gz
 #Source0:	https://github.com/clementine-player/%%{oname}/archive/%%(echo %%{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}1%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
