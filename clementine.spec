@@ -10,7 +10,7 @@
 
 %define	gstapi 1.0
 %define	oname Clementine
-%define	buildnum	78-gb55eca391
+%define	buildnum	88-gd6407152d
 
 %define candidate %{nil}
 %define git %{nil}
@@ -36,7 +36,7 @@ Release:	0.%{candidate}.10
 %else
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}-%{buildnum}/%{oname}-%{version}-%{buildnum}.tar.gz
 #Source0:	https://github.com/clementine-player/%%{oname}/archive/%%(echo %%{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}4%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}1%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
