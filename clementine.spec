@@ -26,7 +26,7 @@ License:	GPLv3+
 Group:	Sound
 Url:		https://www.clementine-player.org/
 %if "%git"
-# Packaged from qt5 branch
+# Packaged from master, built against Qt 6
 Source0:	%{name}-%{git}.tar.xz
 Release:	0.%{git}.1
 %endif
@@ -36,13 +36,13 @@ Release:	0.%{candidate}.10
 %else
 Source0:	https://github.com/clementine-player/Clementine/archive/%{version}-%{buildnum}/%{oname}-%{version}-%{buildnum}.tar.gz
 #Source0:	https://github.com/clementine-player/%%{oname}/archive/%%(echo %%{version} |sed -e 's,.0$,,').tar.gz
-Release:	%{?{pre}:0.%{pre}.}5%{?extrarelsuffix}
+Release:	%{?{pre}:0.%{pre}.}6%{?extrarelsuffix}
 %endif
 
 Source1:	Clementine.conf
 
-#Patch0:	clementine-1.4.1-50-cmake-4.0.0.patch
-Patch1:		clementine-sqlite-no-deprecated.patch
+# Port Clementine 1.4.1 to Qt 6 (CMake, Core5Compat, QRegularExpression, QOpenGLWidget)
+Patch0:		clementine-qt6.patch
 
 # Upstream merged or not yet
 #Patch2:		https://patch-diff.githubusercontent.com/raw/clementine-player/Clementine/pull/7342.patch
@@ -56,23 +56,23 @@ BuildRequires:	gettext
 #BuildRequires:	git
 BuildRequires:		cmake
 BuildRequires:		make
-BuildRequires:		qmake5
+BuildRequires:		qmake-qt6
 BuildRequires:		cmake(absl)
-BuildRequires:		cmake(Qt5Concurrent)
-BuildRequires:		cmake(Qt5Core)
-BuildRequires:		cmake(Qt5DBus)
-BuildRequires:		cmake(Qt5Gui)
-BuildRequires:		cmake(Qt5Network)
-BuildRequires:		cmake(Qt5OpenGL)
-BuildRequires:		cmake(Qt5Sql)
-BuildRequires:		cmake(Qt5Widgets)
-BuildRequires:		cmake(Qt5Xml)
-BuildRequires:		cmake(Qt5Test)
-BuildRequires:		cmake(Qt5X11Extras)
-BuildRequires:		cmake(Qt5WebKitWidgets)
-BuildRequires:		cmake(Qt5LinguistTools)
+BuildRequires:		cmake(Qt6Concurrent)
+BuildRequires:		cmake(Qt6Core)
+BuildRequires:		cmake(Qt6Core5Compat)
+BuildRequires:		cmake(Qt6DBus)
+BuildRequires:		cmake(Qt6Gui)
+BuildRequires:		cmake(Qt6Network)
+BuildRequires:		cmake(Qt6OpenGL)
+BuildRequires:		cmake(Qt6OpenGLWidgets)
+BuildRequires:		cmake(Qt6Sql)
+BuildRequires:		cmake(Qt6Widgets)
+BuildRequires:		cmake(Qt6Xml)
+BuildRequires:		cmake(Qt6Test)
+BuildRequires:		cmake(Qt6LinguistTools)
 BuildRequires:		boost-devel
-BuildRequires:		liblastfm-devel
+BuildRequires:		cmake(lastfm6)
 BuildRequires:		pkgconfig(alsa)
 BuildRequires:		pkgconfig(cryptopp)
 BuildRequires:		pkgconfig(fftw3)
@@ -100,7 +100,6 @@ BuildRequires:		pkgconfig(libspotify)
 BuildRequires:		pkgconfig(libusbmuxd-2.0)
 BuildRequires:		pkgconfig(libxml-2.0)
 BuildRequires:		pkgconfig(protobuf) >= 3.3.2
-BuildRequires:		pkgconfig(QJson)
 BuildRequires:		pkgconfig(sqlite3)
 BuildRequires:		pkgconfig(taglib) >= 2.0
 BuildRequires:		pkgconfig(udisks2)
@@ -120,12 +119,12 @@ Suggests:	gstreamer%{gstapi}-decoders-audio
 # which is need at least to mount mtp devices (tested locally)
 Suggests:	gvfs-iphone
 Requires:	libprojectm-data
-Requires:	%{_lib}qt5sql5-sqlite
+Requires:	qt6-qtbase-sql-sqlite
 
 %description
 Clementine is a modern music player and library organiser. Clementine is
 a port of Amarok 1.4, with some features rewritten to take advantage of
-Qt5.
+Qt 6.
 Features:
  * Search and play your local music library.
 * Listen to internet radio from Last.fm, SomaFM and Magnatune.
@@ -163,17 +162,14 @@ Features:
 #autosetup -p1 -n %%{oname}-%%(echo %%{version} |sed -e 's,.0$,,')%%{pre}
 %endif
 
-sed -i 's|local_server_name_ = qApp->applicationName().toLower();|local_server_name_ = QString(qApp->applicationName()).toLower();|' ext/libclementine-common/core/workerpool.h
-
-
 %build
-%cmake_qt5 \
+%cmake \
 	-DBUNDLE_PROJECTM_PRESETS=OFF \
- 	-DFORCE_GIT_REVISION=%{version} \
-  	-DCMAKE_CXX_STANDARD=20 \
-   	-DCMAKE_EXE_LINKER_FLAGS="`pkgconf --libs protobuf`" \
-	-DBUILD_WERROR=OFF   
-    
+	-DFORCE_GIT_REVISION=%{version} \
+	-DCMAKE_CXX_STANDARD=20 \
+	-DCMAKE_EXE_LINKER_FLAGS="`pkgconf --libs protobuf`" \
+	-DBUILD_WERROR=OFF
+
 %make_build VERBOSE=1
 
 
